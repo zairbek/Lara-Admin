@@ -1,0 +1,46 @@
+{
+    "name": "future/lara-admin",
+    "description": "Laravel пакет админки",
+    "type": "library",
+    "license": "future",
+    "authors": [
+        {
+            "name": "Zair Nurmukhamadov",
+            "email": "nurmukhamadov.z@future-group.ru"
+        }
+    ],
+    "require": {
+        "php": "^8.0",
+        "phpunit/phpunit": "^9.5"
+    },
+    "require-dev": {
+        "illuminate/support": "^8.69",
+        "orchestra/testbench": "^6.22"
+    },
+    "autoload": {
+        "psr-4": {
+            "Future\\LaraAdmin\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Future\\LaraAdmin\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Future\\LaraAdmin\\LaraAdminServiceProvider"
+            ]
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "@php ./vendor/bin/testbench package:discover --ansi"
+        ],
+        "tests": [
+            "vendor/bin/phpunit --verbose"
+        ]
+    },
+    "minimum-stability": "stable"
+}
