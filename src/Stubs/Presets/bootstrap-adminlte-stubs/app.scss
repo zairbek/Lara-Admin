@@ -1,0 +1,16 @@
+// Fonts
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback");
+
+// Variables
+@import 'variables';
+
+// Admin-Lte Font-Awesome
+@import "~@fortawesome/fontawesome-free/css/all.min.css";
+
+// Admin-Lte
+@import "~overlayscrollbars/css/OverlayScrollbars.min.css";
+
+// Admin-Lte
+@import "~admin-lte/build/scss/adminlte";
+// for Auth Pages
+@import "~admin-lte/build/scss/plugins/icheck-bootstrap";
