@@ -5,7 +5,9 @@
 @import 'variables';
 
 // Admin-Lte Font-Awesome
-@import "~@fortawesome/fontawesome-free/css/all.min.css";
+@import "~@fortawesome/fontawesome-free/scss/brands";
+@import "~@fortawesome/fontawesome-free/scss/solid";
+@import "~@fortawesome/fontawesome-free/scss/fontawesome";
 
 // Admin-Lte
 @import "~overlayscrollbars/css/OverlayScrollbars.min.css";
