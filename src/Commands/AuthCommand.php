@@ -43,7 +43,7 @@ class AuthCommand extends Command
 				}
 			}
 
-			copy(__DIR__.$key, $view);
+			copy(__DIR__. '/' .$key, $view);
 		}
 	}
 	
