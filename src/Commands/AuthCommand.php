@@ -12,9 +12,9 @@ class AuthCommand extends Command
 
 	protected $views = [
 		'../Stubs/Auth/bootstrap-adminlte-stubs/layouts/auth.stub' => 'layouts/auth.blade.php',
-		'../Stubs/Auth/bootstrap-adminlte-stubs/pages/auth/forgot-password.stub' => 'pages/auth/passwords/forgot-password.blade.php',
-		'../Stubs/Auth/bootstrap-adminlte-stubs/pages/auth/recover-password.stub' => 'pages/auth/passwords/recover-password.blade.php',
-		'../Stubs/Auth/bootstrap-adminlte-stubs/pages/auth/sign-in.stub' => 'pages/auth/passwords/sign-in.blade.php',
+		'../Stubs/Auth/bootstrap-adminlte-stubs/pages/auth/forgot-password.stub' => 'pages/auth/forgot-password.blade.php',
+		'../Stubs/Auth/bootstrap-adminlte-stubs/pages/auth/recover-password.stub' => 'pages/auth/recover-password.blade.php',
+		'../Stubs/Auth/bootstrap-adminlte-stubs/pages/auth/sign-in.stub' => 'pages/auth/sign-in.blade.php',
 	];
 
 	public function handle()
