@@ -11,7 +11,7 @@ class AuthCommand extends Command
 	protected $description = 'Scaffold basic login views';
 
 	protected $views = [
-		'../Stubs/Auth/bootstrap-adminlte-stubs/layout/auth.stub' => 'layout/auth.blade.php',
+		'../Stubs/Auth/bootstrap-adminlte-stubs/layouts/auth.stub' => 'layouts/auth.blade.php',
 		'../Stubs/Auth/bootstrap-adminlte-stubs/pages/auth/forgot-password.stub' => 'pages/auth/passwords/forgot-password.blade.php',
 		'../Stubs/Auth/bootstrap-adminlte-stubs/pages/auth/recover-password.stub' => 'pages/auth/passwords/recover-password.blade.php',
 		'../Stubs/Auth/bootstrap-adminlte-stubs/pages/auth/sign-in.stub' => 'pages/auth/passwords/sign-in.blade.php',

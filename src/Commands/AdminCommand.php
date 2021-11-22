@@ -11,7 +11,7 @@ class AdminCommand extends Command
 	protected $description = 'Scaffold basic Admin views';
 
 	protected $views = [
-		'../Stubs/Admin/bootstrap-adminlte-stubs/layout/app.stub' => 'layout/app.blade.php',
+		'../Stubs/Admin/bootstrap-adminlte-stubs/layouts/app.stub' => 'layouts/app.blade.php',
 		'../Stubs/Admin/bootstrap-adminlte-stubs/pages/index.stub' => 'pages/index.blade.php',
 		'../Stubs/Admin/bootstrap-adminlte-stubs/components/sidebar.stub' => 'components/sidebar.blade.php',
 		'../Stubs/Admin/bootstrap-adminlte-stubs/components/sidebar/menu.stub' => 'components/sidebar/menu.blade.php',
