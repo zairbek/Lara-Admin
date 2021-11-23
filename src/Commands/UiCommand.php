@@ -13,7 +13,7 @@ class UiCommand extends Command
 
 	public function handle()
 	{
-		BootstrapAdminLte::install();
+		BootstrapAdminLte::install($this);
 
 		$this->info('Bootstrap scaffolding installed successfully.');
 		$this->comment('Please run "npm install && npm run dev" to compile your fresh scaffolding.');

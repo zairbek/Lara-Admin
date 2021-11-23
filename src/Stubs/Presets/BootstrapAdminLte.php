@@ -2,17 +2,19 @@
 
 namespace Future\LaraAdmin\Stubs\Presets;
 
+use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 
 class BootstrapAdminLte extends Preset
 {
-	public static function install()
+	public static function install(Command $command): void
 	{
 		static::updatePackages();
 		static::updateWebpackConfiguration();
 		static::updateSass();
 		static::updateBootstrapping();
 		static::removeNodeModules();
+		static::publicImages($command);
 	}
 
 	/**
@@ -67,5 +69,20 @@ class BootstrapAdminLte extends Preset
 	protected static function updateBootstrapping(): void
 	{
 		copy(__DIR__ . '/bootstrap-adminlte-stubs/bootstrap.js', resource_path('js/bootstrap.js'));
+	}
+
+
+	protected static function publicImages(Command $command): void
+	{
+		$imgDir = resource_path('img');
+
+		if (
+			file_exists($imgDir)
+			&& $command->confirm("The [{$imgDir}] view already exists. Do you want to replace it?")
+		) {
+			rmdir($imgDir);
+		}
+
+		(new Filesystem())->copyDirectory(__DIR__.'/bootstrap-adminlte-stubs/img', resource_path('img'));
 	}
 }
