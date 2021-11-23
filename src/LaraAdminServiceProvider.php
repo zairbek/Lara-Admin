@@ -9,12 +9,15 @@ use Illuminate\Support\ServiceProvider;
 
 class LaraAdminServiceProvider extends ServiceProvider
 {
+	public const HOME = '/admin';
+
 	public function boot()
 	{
 		$this->registerCommands();
 		$this->registerViews();
 		$this->registerViewComponents();
 		$this->registerPublished();
+		$this->registerRoutes();
 	}
 
 	public function register()
@@ -49,5 +52,10 @@ class LaraAdminServiceProvider extends ServiceProvider
 		$this->publishes([
 			__DIR__.'/../resources/views' => resource_path('views/vendor/future'),
 		], 'future:views');
+	}
+
+	protected function registerRoutes(): void
+	{
+		$this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
 	}
 }
