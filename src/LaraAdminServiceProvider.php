@@ -5,7 +5,7 @@ namespace Future\LaraAdmin;
 use Future\LaraAdmin\Commands\MainCommand;
 use Future\LaraAdmin\Commands\UiCommand;
 use Future\LaraAdmin\View\Components\Sidebar;
-use Future\LaraAdmin\View\Components\Sidebar\Menu;
+use Future\LaraAdmin\View\Components\Menu;
 use Illuminate\Support\ServiceProvider;
 
 class LaraAdminServiceProvider extends ServiceProvider

@@ -1,7 +1,8 @@
 <?php
 
-namespace Future\LaraAdmin\View\Components\Sidebar;
+namespace Future\LaraAdmin\View\Components;
 
+use Future\LaraAdmin\View\Components\Sidebar\MenuItem;
 use Illuminate\Support\Collection;
 use Illuminate\View\Component;
 
@@ -69,6 +70,6 @@ class Menu extends Component
      */
     public function render()
     {
-        return view('future::components.sidebar.menu');
+        return view('future::components.menu');
     }
 }

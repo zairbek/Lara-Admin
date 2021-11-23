@@ -29,7 +29,7 @@
         </div>
 
         <!-- Sidebar Menu -->
-        <x-future-sidebar.menu/>
+        <x-future-menu/>
         <!-- /.sidebar-menu -->
     </div>
     <!-- /.sidebar -->
