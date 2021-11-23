@@ -2,13 +2,11 @@
 
 namespace Future\LaraAdmin;
 
-use Carbon\Carbon;
-use Future\LaraAdmin\Commands\AdminCommand;
-use Future\LaraAdmin\Commands\AuthCommand;
 use Future\LaraAdmin\Commands\MainCommand;
 use Future\LaraAdmin\Commands\UiCommand;
+use Future\LaraAdmin\View\Components\Sidebar;
+use Future\LaraAdmin\View\Components\Sidebar\Menu;
 use Illuminate\Support\ServiceProvider;
-use Laravel\Passport\Passport;
 
 class LaraAdminServiceProvider extends ServiceProvider
 {
@@ -24,6 +22,7 @@ class LaraAdminServiceProvider extends ServiceProvider
 		}
 
 		$this->registerViews();
+		$this->registerViewComponents();
 	}
 
 	public function register()
@@ -34,5 +33,13 @@ class LaraAdminServiceProvider extends ServiceProvider
 	protected function registerViews(): void
 	{
 		$this->loadViewsFrom(__DIR__.'/../resources/views', 'future');
+	}
+
+	protected function registerViewComponents(): void
+	{
+		$this->loadViewComponentsAs('future', [
+			Sidebar::class,
+			Menu::class,
+		]);
 	}
 }
