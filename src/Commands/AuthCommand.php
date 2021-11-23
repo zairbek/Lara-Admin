@@ -6,15 +6,15 @@ use Illuminate\Console\Command;
 
 class AuthCommand extends Command
 {
-	protected $signature = 'auth:install';
+	protected $signature = 'admin:auth';
 
 	protected $description = 'Scaffold basic login views';
 
 	protected $views = [
 		'../Stubs/Auth/bootstrap-adminlte-stubs/layouts/auth.stub' => 'layouts/auth.blade.php',
-		'../Stubs/Auth/bootstrap-adminlte-stubs/pages/auth/forgot-password.stub' => 'pages/auth/forgot-password.blade.php',
-		'../Stubs/Auth/bootstrap-adminlte-stubs/pages/auth/recover-password.stub' => 'pages/auth/recover-password.blade.php',
-		'../Stubs/Auth/bootstrap-adminlte-stubs/pages/auth/sign-in.stub' => 'pages/auth/sign-in.blade.php',
+		'../Stubs/Auth/bootstrap-adminlte-stubs/pages/admin/auth/forgot-password.stub' => 'pages/admin/auth/forgot-password.blade.php',
+		'../Stubs/Auth/bootstrap-adminlte-stubs/pages/admin/auth/recover-password.stub' => 'pages/admin/auth/recover-password.blade.php',
+		'../Stubs/Auth/bootstrap-adminlte-stubs/pages/admin/auth/sign-in.stub' => 'pages/admin/auth/sign-in.blade.php',
 	];
 
 	public function handle()
@@ -29,7 +29,7 @@ class AuthCommand extends Command
 			mkdir($directory, 0755, true);
 		}
 
-		if (! is_dir($directory = $this->getViewPath('pages/auth'))) {
+		if (! is_dir($directory = $this->getViewPath('pages/admin/auth'))) {
 			mkdir($directory, 0755, true);
 		}
 	}

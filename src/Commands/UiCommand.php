@@ -7,7 +7,7 @@ use Illuminate\Console\Command;
 
 class UiCommand extends Command
 {
-	protected $signature = 'ui:install';
+	protected $signature = 'admin:ui';
 
 	protected $description = 'Swap the front-end scaffolding for the application';
 

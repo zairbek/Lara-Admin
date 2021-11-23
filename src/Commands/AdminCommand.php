@@ -6,13 +6,13 @@ use Illuminate\Console\Command;
 
 class AdminCommand extends Command
 {
-	protected $signature = 'admin:install';
+	protected $signature = 'admin:admin';
 
 	protected $description = 'Scaffold basic Admin views';
 
 	protected $views = [
 		'../Stubs/Admin/bootstrap-adminlte-stubs/layouts/app.stub' => 'layouts/app.blade.php',
-		'../Stubs/Admin/bootstrap-adminlte-stubs/pages/index.stub' => 'pages/index.blade.php',
+		'../Stubs/Admin/bootstrap-adminlte-stubs/pages/admin/index.stub' => 'pages/admin/index.blade.php',
 		'../Stubs/Admin/bootstrap-adminlte-stubs/components/sidebar.stub' => 'components/sidebar.blade.php',
 		'../Stubs/Admin/bootstrap-adminlte-stubs/components/sidebar/menu.stub' => 'components/sidebar/menu.blade.php',
 	];
@@ -29,7 +29,7 @@ class AdminCommand extends Command
 			mkdir($directory, 0755, true);
 		}
 
-		if (! is_dir($directory = $this->getViewPath('pages/auth/passwords'))) {
+		if (! is_dir($directory = $this->getViewPath('pages/admin/auth'))) {
 			mkdir($directory, 0755, true);
 		}
 
