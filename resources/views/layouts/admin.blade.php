@@ -158,7 +158,7 @@
     <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
-    <x-sidebar/>
+    <x-future-sidebar/>
 
 
     <!-- Content Wrapper. Contains page content -->
