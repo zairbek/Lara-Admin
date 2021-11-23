@@ -17,15 +17,22 @@ class LaraAdminServiceProvider extends ServiceProvider
 		if ($this->app->runningInConsole()) {
 			$this->commands([
 				MainCommand::class,
-				AdminCommand::class,
-				AuthCommand::class,
+//				AdminCommand::class,
+//				AuthCommand::class,
 				UiCommand::class
 			]);
 		}
+
+		$this->registerViews();
 	}
 
 	public function register()
 	{
 		//
+	}
+
+	protected function registerViews(): void
+	{
+		$this->loadViewsFrom(__DIR__.'/../resources/views', 'future');
 	}
 }

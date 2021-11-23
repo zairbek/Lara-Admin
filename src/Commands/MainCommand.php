@@ -14,8 +14,8 @@ class MainCommand extends Command
 	public function handle()
 	{
 		$this->call('admin:ui');
-		$this->call('admin:admin');
-		$this->call('admin:auth');
+//		$this->call('admin:admin');
+//		$this->call('admin:auth');
 
 		$this->info('Админ панель готов');
 	}
