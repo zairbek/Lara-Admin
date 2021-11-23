@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('future::layouts.admin')
 
 @php
   $title = 'Dashboard';

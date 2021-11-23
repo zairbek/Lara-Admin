@@ -14,8 +14,18 @@ class UiCommand extends Command
 	public function handle()
 	{
 		BootstrapAdminLte::install($this);
+		$this->exportBackend();
 
 		$this->info('Bootstrap scaffolding installed successfully.');
 		$this->comment('Please run "npm install && npm run dev" to compile your fresh scaffolding.');
+	}
+
+	protected function exportBackend(): void
+	{
+		file_put_contents(
+			base_path('routes/web.php'),
+			file_get_contents(__DIR__.'/../Stubs/routes.stub'),
+			FILE_APPEND
+		);
 	}
 }

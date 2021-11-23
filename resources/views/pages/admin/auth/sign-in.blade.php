@@ -1,4 +1,4 @@
-@extends('layouts.auth')
+@extends('future::layouts.auth')
 
 @php
   $title = 'Авторизация';
