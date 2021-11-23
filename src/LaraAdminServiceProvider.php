@@ -47,7 +47,7 @@ class LaraAdminServiceProvider extends ServiceProvider
 	protected function registerPublished(): void
 	{
 		$this->publishes([
-			__DIR__.'/../resources/views' => resource_path('views/vendor/courier'),
-		], 'views');
+			__DIR__.'/../resources/views' => resource_path('views/vendor/future'),
+		], 'future:views');
 	}
 }
