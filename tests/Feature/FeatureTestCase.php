@@ -1,8 +1,8 @@
 <?php
 
-namespace Future\LaraApiAuth\Tests\Feature;
+namespace Future\LaraAdmin\Tests\Feature;
 
-use Future\LaraApiAuth\Tests\TestCase;
+use Future\LaraAdmin\Tests\TestCase;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 

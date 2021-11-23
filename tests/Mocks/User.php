@@ -1,6 +1,6 @@
 <?php
 
-namespace Future\LaraApiAuth\Tests\Mocks;
+namespace Future\LaraAdmin\Tests\Mocks;
 
 use Illuminate\Notifications\Notifiable;
 
@@ -10,7 +10,7 @@ use Illuminate\Notifications\Notifiable;
  * @property string $password
  * @property null|string $remember_token
  *
- * @package Future\LaraApiAuth\Tests\Mocks
+ * @package Future\LaraAdmin\Tests\Mocks
  */
 class User extends \Illuminate\Foundation\Auth\User
 {

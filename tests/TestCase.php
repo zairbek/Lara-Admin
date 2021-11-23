@@ -1,29 +1,22 @@
 <?php
 
-namespace Future\LaraApiAuth\Tests;
+namespace Future\LaraAdmin\Tests;
 
-use Future\LaraApiAuth\LaraApiAuthServiceProvider;
-use Future\LaraApiAuth\Tests\Mocks\User;
+use Future\LaraAdmin\LaraAdminServiceProvider;
+use Future\LaraAdmin\Tests\Mocks\User;
 use Illuminate\Config\Repository;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Laravel\Passport\PassportServiceProvider;
 use Orchestra\Testbench\TestCase as TestCaseAlias;
 
 class TestCase extends TestCaseAlias
 {
 	use RefreshDatabase;
 
-	const KEYS = __DIR__.'/keys';
-	const PUBLIC_KEY = self::KEYS.'/oauth-public.key';
-	const PRIVATE_KEY = self::KEYS.'/oauth-private.key';
-
 	protected function setUp(): void
 	{
 		parent::setUp();
 
 		$this->artisan('migrate:fresh');
-
-		$this->artisan('passport:keys');
 	}
 
 	protected function getEnvironmentSetUp($app)
@@ -49,6 +42,6 @@ class TestCase extends TestCaseAlias
 
 	public function getPackageProviders($app)
 	{
-		return [LaraApiAuthServiceProvider::class, PassportServiceProvider::class];
+		return [LaraAdminServiceProvider::class];
 	}
 }
