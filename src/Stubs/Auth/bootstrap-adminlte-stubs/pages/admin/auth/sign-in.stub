@@ -42,7 +42,7 @@
             </form>
 
             <p class="mb-1 mt-3">
-                <a href="{{ route('auth.forgot-password') }}">Я забыл свой пароль</a>
+                <a href="{{ route('admin.auth.forgot-password') }}">Я забыл свой пароль</a>
             </p>
         </div>
         <!-- /.login-card-body -->

@@ -11,7 +11,6 @@ class AuthCommand extends Command
 	protected $description = 'Scaffold basic login views';
 
 	protected $views = [
-		'../Stubs/Auth/bootstrap-adminlte-stubs/layouts/auth.stub' => 'layouts/auth.blade.php',
 		'../Stubs/Auth/bootstrap-adminlte-stubs/pages/admin/auth/forgot-password.stub' => 'pages/admin/auth/forgot-password.blade.php',
 		'../Stubs/Auth/bootstrap-adminlte-stubs/pages/admin/auth/recover-password.stub' => 'pages/admin/auth/recover-password.blade.php',
 		'../Stubs/Auth/bootstrap-adminlte-stubs/pages/admin/auth/sign-in.stub' => 'pages/admin/auth/sign-in.blade.php',
@@ -25,10 +24,6 @@ class AuthCommand extends Command
 
 	protected function ensureDirectoriesExist()
 	{
-		if (! is_dir($directory = $this->getViewPath('layouts'))) {
-			mkdir($directory, 0755, true);
-		}
-
 		if (! is_dir($directory = $this->getViewPath('pages/admin/auth'))) {
 			mkdir($directory, 0755, true);
 		}

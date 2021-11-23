@@ -11,7 +11,9 @@ class AdminCommand extends Command
 	protected $description = 'Scaffold basic Admin views';
 
 	protected $views = [
-		'../Stubs/Admin/bootstrap-adminlte-stubs/layouts/app.stub' => 'layouts/app.blade.php',
+		'../Stubs/Admin/bootstrap-adminlte-stubs/layouts/admin.stub' => 'layouts/admin.blade.php',
+		'../Stubs/Admin/bootstrap-adminlte-stubs/layouts/auth.stub' => 'layouts/auth.blade.php',
+		'../Stubs/Admin/bootstrap-adminlte-stubs/pages/index.stub' => 'pages/index.blade.php',
 		'../Stubs/Admin/bootstrap-adminlte-stubs/pages/admin/index.stub' => 'pages/admin/index.blade.php',
 		'../Stubs/Admin/bootstrap-adminlte-stubs/components/sidebar.stub' => 'components/sidebar.blade.php',
 		'../Stubs/Admin/bootstrap-adminlte-stubs/components/sidebar/menu.stub' => 'components/sidebar/menu.blade.php',
@@ -21,6 +23,7 @@ class AdminCommand extends Command
 	{
 		$this->ensureDirectoriesExist();
 		$this->exportViews();
+		$this->exportBackend();
 	}
 
 	protected function ensureDirectoriesExist()
@@ -50,7 +53,17 @@ class AdminCommand extends Command
 			copy(__DIR__. '/' .$key, $view);
 		}
 	}
-	
+
+
+	protected function exportBackend()
+	{
+		file_put_contents(
+			base_path('routes/web.php'),
+			file_get_contents(__DIR__.'/Auth/stubs/routes.stub'),
+			FILE_APPEND
+		);
+	}
+
 	protected function getViewPath($path)
 	{
 		return implode(DIRECTORY_SEPARATOR, [
