@@ -3,8 +3,10 @@
 namespace Future\LaraAdmin;
 
 use Future\LaraAdmin\Commands\UiCommand;
+use Future\LaraAdmin\Http\Middleware\Authenticate;
 use Future\LaraAdmin\View\Components\Sidebar;
 use Future\LaraAdmin\View\Components\Menu;
+use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
 
 class LaraAdminServiceProvider extends ServiceProvider
@@ -18,6 +20,7 @@ class LaraAdminServiceProvider extends ServiceProvider
 		$this->registerViewComponents();
 		$this->registerPublished();
 		$this->registerRoutes();
+		$this->registerMiddlewares();
 	}
 
 	public function register()
@@ -69,5 +72,11 @@ class LaraAdminServiceProvider extends ServiceProvider
 	protected function registerRoutes(): void
 	{
 		$this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
+	}
+
+	protected function registerMiddlewares(): void
+	{
+		$router = $this->app->make(Router::class);
+		$router->aliasMiddleware('auth:admin', Authenticate::class);
 	}
 }

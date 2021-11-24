@@ -10,7 +10,7 @@ Route::group(['prefix' => 'admin'], function () {
 	Route::get('/auth/recover-password', fn() => view('future::pages.admin.auth.recover-password'))->name('admin.auth.recover-password');
 });
 
-Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
 	Route::get('/', fn() => view('future::pages.admin.index'))->name('admin');
 });
 
