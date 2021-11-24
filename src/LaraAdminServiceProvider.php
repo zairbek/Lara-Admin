@@ -4,6 +4,7 @@ namespace Future\LaraAdmin;
 
 use Future\LaraAdmin\Commands\UiCommand;
 use Future\LaraAdmin\Http\Middleware\Authenticate;
+use Future\LaraAdmin\Http\Middleware\RedirectIfAuthenticated;
 use Future\LaraAdmin\View\Components\Sidebar;
 use Future\LaraAdmin\View\Components\Menu;
 use Illuminate\Routing\Router;
@@ -78,5 +79,6 @@ class LaraAdminServiceProvider extends ServiceProvider
 	{
 		$router = $this->app->make(Router::class);
 		$router->aliasMiddleware('auth.admin', Authenticate::class);
+		$router->aliasMiddleware('guest.admin', RedirectIfAuthenticated::class);
 	}
 }

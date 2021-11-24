@@ -16,4 +16,9 @@ class SignInController extends Controller
 	 * @var string
 	 */
 	protected $redirectTo = LaraAdminServiceProvider::HOME;
+
+	public function __construct()
+	{
+		$this->middleware('guest.admin');
+	}
 }
