@@ -8,7 +8,7 @@ Route::group(['middleware' => 'web'], function () {
 		Route::get('/auth/sign-in', [SignInController::class, 'showForm'])->name('admin.auth.sign-in');
 		Route::post('/auth/sign-in', [SignInController::class, 'signIn'])->name('admin.auth.sign-in.post');
 
-		Route::get('/auth/logout', [SignInController::class, 'signOut'])->name('admin.auth.sign-out');
+		Route::get('/auth/sign-out', [SignInController::class, 'signOut'])->name('admin.auth.sign-out');
 
 		Route::get('/auth/forgot-password', fn() => view('future::pages.admin.auth.forgot-password'))->name('admin.auth.forgot-password');
 		Route::get('/auth/recover-password', fn() => view('future::pages.admin.auth.recover-password'))->name('admin.auth.recover-password');
