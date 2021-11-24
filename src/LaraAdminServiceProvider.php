@@ -77,6 +77,6 @@ class LaraAdminServiceProvider extends ServiceProvider
 	protected function registerMiddlewares(): void
 	{
 		$router = $this->app->make(Router::class);
-		$router->aliasMiddleware('auth:admin', Authenticate::class);
+		$router->aliasMiddleware('auth.admin', Authenticate::class);
 	}
 }
