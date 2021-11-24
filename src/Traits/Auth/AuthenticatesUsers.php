@@ -165,7 +165,7 @@ trait AuthenticatesUsers
 	 * @param Request $request
 	 * @return RedirectResponse|JsonResponse
 	 */
-	public function logout(Request $request)
+	public function signOut(Request $request)
 	{
 		$this->guard()->logout();
 

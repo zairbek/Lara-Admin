@@ -11,8 +11,11 @@
             <div class="image">
                 <img src="/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
             </div>
-            <div class="info">
+            <div class="info w-100">
                 <a href="#" class="d-block">Alexander Pierce</a>
+            </div>
+            <div class="logout">
+                <a href="{{ route('admin.auth.sign-out') }}" title="Выйти" class="btn"><i class="fas fa-sign-out-alt fa-fw"></i></a>
             </div>
         </div>
 
