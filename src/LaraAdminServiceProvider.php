@@ -51,7 +51,19 @@ class LaraAdminServiceProvider extends ServiceProvider
 	{
 		$this->publishes([
 			__DIR__.'/../resources/views' => resource_path('views/vendor/future'),
-		], 'future:views');
+		], 'future:views:all');
+
+		$this->publishes([
+			__DIR__.'/../resources/views/layouts' => resource_path('views/vendor/future/layouts'),
+		], 'future:views:layouts');
+
+		$this->publishes([
+			__DIR__.'/../resources/views/components' => resource_path('views/vendor/future/components'),
+		], 'future:views:components');
+
+		$this->publishes([
+			__DIR__.'/../resources/views/pages/admin/auth' => resource_path('views/vendor/future/pages/admin/auth'),
+		], 'future:views:admin-auth');
 	}
 
 	protected function registerRoutes(): void
