@@ -16,8 +16,8 @@ Route::group(['middleware' => 'web'], function () {
 		Route::post('/auth/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('admin.auth.forgot-password.post');
 
 
-		Route::get('/auth/recover-password/{token}', [ResetPasswordController::class, 'showResetForm'])->name('passwords.reset');
-		Route::post('/auth/recover-password', [ResetPasswordController::class, 'reset'])->name('passwords.update');
+		Route::get('/auth/recover-password/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+		Route::post('/auth/recover-password', [ResetPasswordController::class, 'reset'])->name('password.update');
 	});
 
 	Route::group(['prefix' => 'admin', 'middleware' => 'auth.admin'], function () {
