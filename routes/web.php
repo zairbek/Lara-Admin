@@ -11,10 +11,8 @@ Route::group(['middleware' => 'web'], function () {
 		Route::post('/auth/sign-in', [SignInController::class, 'signIn'])->name('admin.auth.sign-in.post');
 		Route::get('/auth/sign-out', [SignInController::class, 'signOut'])->name('admin.auth.sign-out');
 
-
 		Route::get('/auth/forgot-password', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('admin.auth.forgot-password');
 		Route::post('/auth/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('admin.auth.forgot-password.post');
-
 
 		Route::get('/auth/recover-password/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
 		Route::post('/auth/recover-password', [ResetPasswordController::class, 'reset'])->name('password.update');
