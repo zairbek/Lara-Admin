@@ -9,7 +9,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
     <div class="login-logo">
-        <a><b>Future</b> Admin</a>
+        <a><b>Future</b>Admin</a>
     </div>
 
     @yield('content')
