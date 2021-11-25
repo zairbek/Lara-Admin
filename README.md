@@ -65,7 +65,7 @@ php artisan vendor:publish
 ```bash
 php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"
 
-php artisan vendor:publish --provider="Future\LaraApiAuth\LaraAdminServiceProvider" --tag="migrations"
+php artisan vendor:publish --provider="Future\LaraAdmin\LaraAdminServiceProvider" --tag="migrations"
 ```
 
 

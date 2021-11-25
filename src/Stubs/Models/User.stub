@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
-class User extends Future\LaraAdmin\Models\User
+use Future\LaraAdmin\Models\User as FutureUser;
+
+class User extends FutureUser
 {
     //
 }
