@@ -4,6 +4,7 @@ namespace Future\LaraAdmin\Commands;
 
 use Future\LaraAdmin\Stubs\Presets\BootstrapAdminLte;
 use Illuminate\Console\Command;
+use Illuminate\Filesystem\Filesystem;
 
 class UiCommand extends Command
 {
@@ -33,6 +34,8 @@ class UiCommand extends Command
 
 	protected function exportModels(): void
 	{
+		(new Filesystem)->ensureDirectoryExists(app_path('Repositories'));
+
 		copy(__DIR__.'/../Stubs/Models/User.stub', app_path('Models/User.php'));
 		copy(__DIR__.'/../Stubs/Repositories/UserRepository.php.stub', app_path('Repositories/UserRepository.php'));
 	}
