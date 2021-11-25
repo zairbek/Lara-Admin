@@ -22,6 +22,7 @@ class LaraAdminServiceProvider extends ServiceProvider
 		$this->registerPublished();
 		$this->registerRoutes();
 		$this->registerMiddlewares();
+		$this->registerMigrations();
 	}
 
 	public function register()
@@ -80,5 +81,21 @@ class LaraAdminServiceProvider extends ServiceProvider
 		$router = $this->app->make(Router::class);
 		$router->aliasMiddleware('auth.admin', Authenticate::class);
 		$router->aliasMiddleware('guest.admin', RedirectIfAuthenticated::class);
+	}
+
+	protected function registerMigrations(): void
+	{
+		$this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+
+		// Export the migration
+		if ($this->app->runningInConsole()) {
+			if (! class_exists('CreatePostsTable')) {
+				$this->publishes([
+					__DIR__ . '/../database/migrations/future_users_table.php.stub' => database_path('migrations/' . date('Y_m_d_His', time()) . '_future_users_table.php'),
+					__DIR__ . '/../database/migrations/update_permission_tables.php.stub' => database_path('migrations/' . date('Y_m_d_His', time()) . '_update_permission_tables.php'),
+					// you can add any number of migrations here
+				], 'migrations');
+			}
+		}
 	}
 }

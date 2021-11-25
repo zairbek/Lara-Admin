@@ -61,6 +61,13 @@ php artisan vendor:publish
 ```
 
 
+### Этапы
+```bash
+php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"
+
+php artisan vendor:publish --provider="Future\LaraApiAuth\LaraAdminServiceProvider" --tag="migrations"
+```
+
 
 # Старый
 

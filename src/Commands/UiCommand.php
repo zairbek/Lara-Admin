@@ -15,6 +15,7 @@ class UiCommand extends Command
 	{
 		BootstrapAdminLte::install($this);
 		$this->exportBackend();
+		$this->exportModels();
 
 		$this->info('Bootstrap scaffolding installed successfully.');
 		$this->comment('Please run "npm install && npm run dev" to compile your fresh scaffolding.');
@@ -27,5 +28,10 @@ class UiCommand extends Command
 			file_get_contents(__DIR__.'/../Stubs/routes.stub'),
 			FILE_APPEND
 		);
+	}
+
+	protected function exportModels(): void
+	{
+		copy(__DIR__.'/../Stubs/Models/User.stub', app_path('Models/User.php'));
 	}
 }
