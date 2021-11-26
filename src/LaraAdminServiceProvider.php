@@ -9,6 +9,9 @@ use Future\LaraAdmin\View\Components\Sidebar;
 use Future\LaraAdmin\View\Components\Menu;
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
+use Spatie\Permission\Middlewares\PermissionMiddleware;
+use Spatie\Permission\Middlewares\RoleMiddleware;
+use Spatie\Permission\Middlewares\RoleOrPermissionMiddleware;
 
 class LaraAdminServiceProvider extends ServiceProvider
 {
@@ -81,6 +84,9 @@ class LaraAdminServiceProvider extends ServiceProvider
 		$router = $this->app->make(Router::class);
 		$router->aliasMiddleware('auth.admin', Authenticate::class);
 		$router->aliasMiddleware('guest.admin', RedirectIfAuthenticated::class);
+		$router->aliasMiddleware('role', RoleMiddleware::class);
+		$router->aliasMiddleware('permission', PermissionMiddleware::class);
+		$router->aliasMiddleware('role_or_permission', RoleOrPermissionMiddleware::class);
 	}
 
 	protected function registerMigrations(): void

@@ -18,7 +18,7 @@ Route::group(['middleware' => 'web'], function () {
 		Route::post('/auth/recover-password', [ResetPasswordController::class, 'reset'])->name('password.update');
 	});
 
-	Route::group(['prefix' => 'admin', 'middleware' => 'auth.admin'], function () {
+	Route::group(['prefix' => 'admin', 'middleware' => ['auth.admin', 'permission:admin@show']], function () {
 		Route::get('/', fn() => view('future::pages.admin.index'))->name('admin');
 	});
 });
