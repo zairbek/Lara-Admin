@@ -24,8 +24,8 @@ class SeedUsersRolesPermissionsCommand extends Command
 		app(GivePermissionSeeder::class)->run(new RoleRepository() ,new PermissionRepository());
 		app(UserSeeder::class)->run(new UserRepository());
 
-		$this->info('Роли, доступы и пользователи создались');
-		$this->comment('Создались пользователи:');
+		$this->info('Роли, доступы и пользователи создались.');
+		$this->comment('Пользователи:');
 		collect(UserSeeder::USERS)->each(function ($user, $role) {
 			$this->comment(sprintf('%s - %s, %s', $role, $user['email'], $user['password']));
 		});

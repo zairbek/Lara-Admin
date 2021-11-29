@@ -51,6 +51,27 @@ php artisan future:install
 npm install && npm run production
 ```
 
+```php
+    'users' => [
+        'driver' => 'eloquent',
+        'model' => \Future\LaraAdmin\Models\User::class, # Установите это
+    ],
+```
+
+```bash
+php artisan config:cache
+
+php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"
+
+php artisan vendor:publish --provider="Future\LaraAdmin\LaraAdminServiceProvider" --tag="migrations"
+
+php artisan migrate
+
+php artisan future:seed
+```
+
+
+
 5. Готово.
 
 
@@ -62,11 +83,6 @@ php artisan vendor:publish
 
 
 ### Этапы
-```bash
-php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"
-
-php artisan vendor:publish --provider="Future\LaraAdmin\LaraAdminServiceProvider" --tag="migrations"
-```
 
 
 # Старый

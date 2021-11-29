@@ -16,7 +16,7 @@ class UiCommand extends Command
 	{
 		BootstrapAdminLte::install($this);
 
-		$this->info('Bootstrap scaffolding installed successfully.');
-		$this->comment('Please run "npm install && npm run dev" to compile your fresh scaffolding.');
+		$this->info('Все файлы необходимые для формирование админки перенеслись.');
+		$this->comment('Пожалуйста запустите "npm install && npm run dev" для компиляции css, js файлы.');
 	}
 }
