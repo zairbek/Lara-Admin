@@ -1,10 +1,8 @@
 <?php
 
-namespace App\Repositories;
+namespace Future\LaraAdmin\Repositories;
 
-use App\Models\User;
-use Future\LaraAdmin\Repositories\Repository;
-use Future\LaraAdmin\Repositories\RoleRepository;
+use Future\LaraAdmin\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 

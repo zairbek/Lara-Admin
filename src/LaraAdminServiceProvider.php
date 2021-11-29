@@ -2,6 +2,8 @@
 
 namespace Future\LaraAdmin;
 
+use Future\LaraAdmin\Commands\FutureCommand;
+use Future\LaraAdmin\Commands\SeedUsersRolesPermissionsCommand;
 use Future\LaraAdmin\Commands\UiCommand;
 use Future\LaraAdmin\Http\Middleware\Authenticate;
 use Future\LaraAdmin\Http\Middleware\RedirectIfAuthenticated;
@@ -37,7 +39,9 @@ class LaraAdminServiceProvider extends ServiceProvider
 	{
 		if ($this->app->runningInConsole()) {
 			$this->commands([
-				UiCommand::class
+				FutureCommand::class,
+				UiCommand::class,
+				SeedUsersRolesPermissionsCommand::class,
 			]);
 		}
 	}
