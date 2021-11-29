@@ -8,6 +8,12 @@ use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
 {
+	public const USERS = [
+		'admin' =>      ['email' => 'admin@gmail.com', 'first_name' => 'Админ', 'password' => '12345678'],
+		'manager' =>    ['email' => 'manager@gmail.com', 'first_name' => 'Менеджер', 'password' => '12345678'],
+		'user' =>       ['email' => 'user@gmail.com', 'first_name' => 'Пользователь', 'password' => '12345678'],
+	];
+
     /**
      * Run the database seeds.
      *
@@ -18,16 +24,10 @@ class UserSeeder extends Seeder
     {
         $hasher = app(Hasher::class);
 
-        $users = collect([
-            'admin' =>      ['email' => 'admin@gmail.com', 'first_name' => 'Админ', 'password' => $hasher->make('12345678')],
-            'manager' =>    ['email' => 'manager@gmail.com', 'first_name' => 'Менеджер', 'password' => $hasher->make('12345678')],
-            'user' =>       ['email' => 'user@gmail.com', 'first_name' => 'Пользователь', 'password' => $hasher->make('12345678')],
-        ]);
-
-        $users->each(function ($item, $role) use ($repository) {
+		collect(self::USERS)->each(function ($item, $role) use ($repository, $hasher) {
             $repository->updateOrCreate(
                 ['email' => $item['email']],
-                ['first_name' => $item['first_name'], 'password' => $item['password']],
+                ['first_name' => $item['first_name'], 'password' => $hasher->make($item['password'])],
                 $role
             );
         });
