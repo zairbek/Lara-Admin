@@ -2,10 +2,10 @@
 
 namespace Future\LaraAdmin\Commands;
 
-use Database\Seeders\GivePermissionSeeder;
-use Database\Seeders\PermissionSeeder;
-use Database\Seeders\RoleSeeder;
-use Database\Seeders\UserSeeder;
+use Future\LaraAdmin\Database\Seeders\GivePermissionSeeder;
+use Future\LaraAdmin\Database\Seeders\PermissionSeeder;
+use Future\LaraAdmin\Database\Seeders\RoleSeeder;
+use Future\LaraAdmin\Database\Seeders\UserSeeder;
 use Illuminate\Console\Command;
 
 class SeedUsersRolesPermissionsCommand extends Command

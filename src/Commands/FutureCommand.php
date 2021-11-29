@@ -15,8 +15,6 @@ class FutureCommand extends Command
 		$this->exportBackend();
 
 		$this->call('future:ui');
-		$this->call('vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"');
-		$this->call('vendor:publish --provider="Future\LaraAdmin\LaraAdminServiceProvider" --tag="migrations"');
 	}
 
 	protected function exportBackend(): void

@@ -1,8 +1,8 @@
 <?php
 
-namespace Database\Seeders;
+namespace Future\LaraAdmin\Database\Seeders;
 
-use App\Repositories\UserRepository;
+use Future\LaraAdmin\Repositories\UserRepository;
 use Illuminate\Contracts\Hashing\Hasher;
 use Illuminate\Database\Seeder;
 

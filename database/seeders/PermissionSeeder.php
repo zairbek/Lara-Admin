@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Seeders;
+namespace Future\LaraAdmin\Database\Seeders;
 
 use Future\LaraAdmin\Repositories\PermissionRepository;
 use Illuminate\Database\Seeder;
