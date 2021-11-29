@@ -20,13 +20,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Future\\LaraAdmin\\": "src/"
+            "Future\\LaraAdmin\\": "src/",
+            "Future\\LaraAdmin\\Database\\Seeders\\": "database/seeders/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Future\\LaraAdmin\\Tests\\": "tests/",
-            "Future\\LaraAdmin\\Database\\Seeders\\": "database/seeders/"
+            "Future\\LaraAdmin\\Tests\\": "tests/"
         }
     },
     "extra": {
