@@ -51,6 +51,25 @@ php artisan future:install
 npm install && npm run production
 ```
 
+Откройте файл `config/auth.php`, измените значение `model` на `\Future\LaraAdmin\Models\User::class`:
+```php
+    'users' => [
+        'driver' => 'eloquent',
+        'model' => \Future\LaraAdmin\Models\User::class, # Установите это
+    ],
+```
+
+Выполните миграцию
+```bash
+php artisan migrate
+```
+
+Это команда создаст ролей, доступов и пользователей 
+```php
+php artisan future:seed
+```
+
+
 5. Готово.
 
 
@@ -60,6 +79,8 @@ npm install && npm run production
 php artisan vendor:publish
 ```
 
+
+### Этапы
 
 
 # Старый

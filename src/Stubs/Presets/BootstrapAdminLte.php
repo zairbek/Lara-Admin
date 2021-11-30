@@ -68,7 +68,10 @@ class BootstrapAdminLte extends Preset
 	 */
 	protected static function updateBootstrapping(): void
 	{
+		(new Filesystem)->ensureDirectoryExists(resource_path('js/scripts'));
+
 		copy(__DIR__ . '/bootstrap-adminlte-stubs/bootstrap.js', resource_path('js/bootstrap.js'));
+		copy(__DIR__ . '/bootstrap-adminlte-stubs/scripts/confirm.js', resource_path('js/scripts/confirm.js'));
 	}
 
 
