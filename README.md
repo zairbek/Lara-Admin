@@ -60,12 +60,6 @@ npm install && npm run production
 ```
 
 ```bash
-php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"
-php artisan vendor:publish --provider="Future\LaraAdmin\LaraAdminServiceProvider" --tag="migrations"
-php artisan vendor:publish --provider="Spatie\MediaLibrary\MediaLibraryServiceProvider" --tag="migrations"
-php artisan vendor:publish --provider="Spatie\MediaLibrary\MediaLibraryServiceProvider" --tag="config"
-
-php artisan config:cache
 php artisan migrate
 php artisan future:seed
 ```

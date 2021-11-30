@@ -8,13 +8,22 @@ class FutureCommand extends Command
 {
 	protected $signature = 'future:install';
 
-	protected $description = 'Заготовки';
+	protected $description = 'Future';
 
 	public function handle(): void
 	{
 		$this->exportBackend();
 
 		$this->call('future:ui');
+
+		$this->call('vendor:publish', ['--provider' => 'Spatie\Permission\PermissionServiceProvider']);
+		$this->call('vendor:publish', ['--provider' => 'Future\LaraAdmin\LaraAdminServiceProvider', '--tag' => 'migrations']);
+		$this->call('vendor:publish', ['--provider' => 'Spatie\MediaLibrary\MediaLibraryServiceProvider', '--tag' => 'migrations']);
+		$this->call('vendor:publish', ['--provider' => 'Spatie\MediaLibrary\MediaLibraryServiceProvider', '--tag' => 'config']);
+
+		$this->call('config:clear');
+
+		$this->info('ура');
 	}
 
 	protected function exportBackend(): void
