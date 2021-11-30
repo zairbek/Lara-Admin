@@ -59,11 +59,15 @@ npm install && npm run production
     ],
 ```
 
+Выполните миграцию
 ```bash
 php artisan migrate
-php artisan future:seed
 ```
 
+Это команда создаст ролей, доступов и пользователей 
+```php
+php artisan future:seed
+```
 
 
 5. Готово.

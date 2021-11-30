@@ -16,10 +16,10 @@ class FutureCommand extends Command
 
 		$this->call('future:ui');
 
-		$this->call('vendor:publish', ['--provider' => 'Spatie\Permission\PermissionServiceProvider']);
-		$this->call('vendor:publish', ['--provider' => 'Future\LaraAdmin\LaraAdminServiceProvider', '--tag' => 'migrations']);
 		$this->call('vendor:publish', ['--provider' => 'Spatie\MediaLibrary\MediaLibraryServiceProvider', '--tag' => 'migrations']);
 		$this->call('vendor:publish', ['--provider' => 'Spatie\MediaLibrary\MediaLibraryServiceProvider', '--tag' => 'config']);
+		$this->call('vendor:publish', ['--provider' => 'Future\LaraAdmin\LaraAdminServiceProvider', '--tag' => 'migrations']);
+		$this->call('vendor:publish', ['--provider' => 'Spatie\Permission\PermissionServiceProvider']);
 
 		$this->call('config:clear');
 

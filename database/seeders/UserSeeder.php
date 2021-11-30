@@ -22,12 +22,10 @@ class UserSeeder extends Seeder
      */
     public function run(UserRepository $repository)
     {
-        $hasher = app(Hasher::class);
-
-		collect(self::USERS)->each(function ($item, $role) use ($repository, $hasher) {
+		collect(self::USERS)->each(function ($item, $role) use ($repository) {
             $repository->updateOrCreate(
                 ['email' => $item['email']],
-                ['first_name' => $item['first_name'], 'password' => $hasher->make($item['password'])],
+                ['first_name' => $item['first_name'], 'password' => $item['password']],
                 $role
             );
         });
