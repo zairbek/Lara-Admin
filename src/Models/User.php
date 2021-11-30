@@ -12,6 +12,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Collection;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Permission\Traits\HasRoles;
 
 /**
@@ -27,6 +28,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @property null|Carbon 	$birthday
  * @property null|array 	$properties
  * @property Collection     $roles
+ * @property Media     		$avatar
  *
  * @package App
  */
@@ -103,6 +105,20 @@ class User extends Authenticatable implements HasMedia
         return $name;
     }
 
+	public function setAvatarAttribute($value)
+	{
+		$this->addMedia($value)->toMediaCollection('avatar');
+    }
+
+	public function getAvatarAttribute(): ?Media
+	{
+		return $this->load('media')->getMedia('avatar')->first();
+    }
+
+	public function getAvatarUrl(): ?string
+	{
+		return $this->avatar ? $this->avatar->getUrl() : null;
+    }
 
 	public function registerMediaCollections(): void
 	{

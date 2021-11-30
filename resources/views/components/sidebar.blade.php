@@ -9,7 +9,7 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="{{ Auth::user()->avatar ?? asset('dist/img/avatar5.png') }}" class="img-circle elevation-2" alt="{{ Auth::user()->getName() }}">
+                <img src="{{ Auth::user()->getAvatarUrl() ?? asset('dist/img/avatar5.png') }}" class="img-circle elevation-2" alt="{{ Auth::user()->getName() }}">
             </div>
             <div class="info w-100">
                 <a href="#" class="d-block">{{ Auth::user()->getName() }}</a>
