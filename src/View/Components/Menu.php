@@ -23,7 +23,7 @@ class Menu extends Component
                 new MenuItem(
                     'Dashboard',
                     active: false,
-                    link: '/',
+                    link: '/admin',
                     icon: 'fas fa-tachometer-alt',
                     notification: [
                         'type' => 'info',
@@ -42,7 +42,7 @@ class Menu extends Component
                         new MenuItem(
                             title: 'Пользователи',
                             active: true,
-                            link: '/',
+                            link: '/admin/users',
                             icon: 'fas fa-user'
                         ),
                         new MenuItem(

@@ -1,6 +1,6 @@
 @php
-/** @var \Future\LaraAdmin\Models\User $user */
-/** @var \Spatie\Permission\Models\Role $role */
+    /** @var \Future\LaraAdmin\Models\User $user */
+    /** @var \Spatie\Permission\Models\Role $role */
 @endphp
 
 @extends('future::layouts.admin')
@@ -165,7 +165,8 @@
 
                                         <div class="form-group row">
                                             <div class="offset-sm-2 col-sm-10">
-                                                <button type="submit" class="btn btn-danger">Создать</button>
+                                                <a href="{{ route('future.pages.users.index') }}" class="btn btn-sm btn-default">Назад</a>
+                                                <button type="submit" class="btn btn-danger">Сохранить</button>
                                             </div>
                                         </div>
                                     </form>

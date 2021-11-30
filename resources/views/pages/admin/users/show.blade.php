@@ -1,6 +1,6 @@
 @php
-/** @var \Future\LaraAdmin\Models\User $user */
-/** @var \Spatie\Permission\Models\Role $role */
+    /** @var \Future\LaraAdmin\Models\User $user */
+    /** @var \Spatie\Permission\Models\Role $role */
 @endphp
 
 @extends('future::layouts.admin')
@@ -38,27 +38,6 @@
                                      src="{{ $user->getAvatarUrl() ?? asset('dist/img/avatar5.png') }}"
                                      alt="{{ $user->getName() }}">
                             </div>
-                            <div class="form-group mt-4">
-                                <form class="input-group"
-                                      action="{{ route('future.pages.users.avatar.update', $user->id) }}"
-                                      method="post"
-                                      enctype="multipart/form-data"
-                                >
-                                    @csrf
-                                    @method('put')
-                                    <div class="custom-file">
-                                        <input type="file" name="avatar" class="custom-file-input @error('avatar') is-invalid @enderror" id="exampleInputFile">
-                                        <label class="custom-file-label" for="exampleInputFile">{{ $user->avatar?->file_name }}</label>
-                                    </div>
-
-                                    <div class="input-group-append">
-                                        <button type="submit" class="btn btn-default">
-                                            <i class="fas fa-upload"></i>
-                                        </button>
-                                    </div>
-                                    @error('avatar')<span class="error invalid-feedback d-block">{{ $message }}</span>@enderror
-                                </form>
-                            </div>
                             <h3 class="profile-username text-center">{{ $user->getName() }}</h3>
                             <p class="text-muted text-center">{{ $user->roles->implode('title', ', ') }}</p>
                         </div>
@@ -78,13 +57,7 @@
                             <div class="tab-content">
 
                                 <div class="tab-pane active" id="settings">
-                                    <form class="form-horizontal"
-                                          action="{{ route('future.pages.users.update', $user->id) }}"
-                                          method="post"
-                                    >
-                                        @csrf
-                                        @method('put')
-
+                                    <div class="form-horizontal">
                                         <div class="form-group row">
                                             <label for="inputName" class="col-sm-2 col-form-label">ФИО</label>
                                             <div class="col-sm-3">
@@ -165,10 +138,11 @@
 
                                         <div class="form-group row">
                                             <div class="offset-sm-2 col-sm-10">
-                                                <button type="submit" class="btn btn-danger">Создать</button>
+                                                <a href="{{ route('future.pages.users.index') }}" class="btn btn-sm btn-default">Назад</a>
+                                                <a href="{{ route('future.pages.users.edit', $user->id) }}" class="btn btn-sm btn-primary">Редактировать</a>
                                             </div>
                                         </div>
-                                    </form>
+                                    </div>
                                 </div>
 
                             </div>
