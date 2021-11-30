@@ -4,10 +4,14 @@ namespace Future\LaraAdmin\Models;
 
 use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Hashing\Hasher;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Collection;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Permission\Traits\HasRoles;
 
 /**
@@ -20,18 +24,19 @@ use Spatie\Permission\Traits\HasRoles;
  * @property string 		$email
  * @property string 		$password
  * @property bool 			$active
- * @property null|string 	$avatar
  * @property null|Carbon 	$birthday
  * @property null|array 	$properties
+ * @property Collection     $roles
  *
  * @package App
  */
-class User extends Authenticatable
+class User extends Authenticatable implements HasMedia
 {
     use HasFactory;
     use Notifiable;
     use SoftDeletes;
     use HasRoles;
+	use InteractsWithMedia;
 
     /**
      * The attributes that are mass assignable.
@@ -46,7 +51,6 @@ class User extends Authenticatable
         'phone_number',
         'email',
         'password',
-        'active',
         'avatar',
         'birthday',
         'properties'
@@ -74,6 +78,11 @@ class User extends Authenticatable
         'properties' => 'array',
     ];
 
+	public function setPasswordAttribute($value)
+	{
+		$this->attributes['password'] = app(Hasher::class)->make($value);
+	}
+
     public function getName(): string
     {
         $name = '';
@@ -93,4 +102,10 @@ class User extends Authenticatable
 
         return $name;
     }
+
+
+	public function registerMediaCollections(): void
+	{
+		$this->addMediaCollection('avatar')->singleFile();
+	}
 }

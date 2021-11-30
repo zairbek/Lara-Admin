@@ -21,7 +21,7 @@ class FutureUsersTable extends Migration
             $table->string('last_name')->nullable()->comment('Фамилия');
             $table->string('second_name')->nullable()->comment('Отчество');
             $table->string('login')->nullable()->comment('Логин');
-            $table->unsignedInteger('phone_number')->nullable()->comment('Телефон номер в полном формате без знаков');
+            $table->unsignedBigInteger('phone_number')->nullable()->comment('Телефон номер в полном формате без знаков');
 
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
@@ -29,7 +29,6 @@ class FutureUsersTable extends Migration
             $table->rememberToken();
 
             $table->boolean('active')->default(true)->comment('Активность');
-            $table->string('avatar')->nullable()->comment('Аватар пользователя');
             $table->dateTime('birthday')->nullable()->comment('Дата рождение');
             $table->json('properties')->nullable()->comment('Вдруг понадобится что-то добавить');
 

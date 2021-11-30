@@ -1,4 +1,5 @@
 import 'overlayscrollbars/js/OverlayScrollbars.min'
+import { ConfirmBtn } from './scripts/confirm'
 
 window._ = require('lodash');
 
@@ -38,3 +39,5 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 // Admin LTE
 require('admin-lte/build/js/AdminLTE');
+
+new ConfirmBtn();

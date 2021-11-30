@@ -3,6 +3,7 @@
 use Future\LaraAdmin\Http\Controllers\Auth\ForgotPasswordController;
 use Future\LaraAdmin\Http\Controllers\Auth\ResetPasswordController;
 use Future\LaraAdmin\Http\Controllers\Auth\SignInController;
+use Future\LaraAdmin\Http\Controllers\Users\UsersController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => 'web'], function () {
@@ -20,5 +21,12 @@ Route::group(['middleware' => 'web'], function () {
 
 	Route::group(['prefix' => 'admin', 'middleware' => ['auth.admin', 'permission:admin@show']], function () {
 		Route::get('/', fn() => view('future::pages.admin.index'))->name('admin');
+
+
+		Route::group([], function () {
+			Route::resource('users', UsersController::class)->names('future.pages.users');
+			Route::put('users/{user}/avatar', [UsersController::class, 'avatarUpdate'])->name('future.pages.users.avatar.update');
+		});
+
 	});
 });

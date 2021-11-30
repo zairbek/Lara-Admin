@@ -3,6 +3,7 @@
 namespace Future\LaraAdmin\Repositories;
 
 use Exception;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -20,7 +21,8 @@ abstract class Repository
     {
         $this->makeModel();
         $this->makeBuilder();
-    }
+		$this->afterMakeBuilder();
+	}
 
     /**
      * Defining model class
@@ -42,6 +44,11 @@ abstract class Repository
 
         return $this->model = $model;
     }
+
+	protected function afterMakeBuilder()
+	{
+		//
+	}
 
     protected function makeBuilder(): Builder
     {
@@ -76,4 +83,16 @@ abstract class Repository
     {
         return $this->query->get($columns);
     }
+
+	/**
+	 * @param null $perPage
+	 * @param string[] $columns
+	 * @param string $pageName
+	 * @param null $page
+	 * @return LengthAwarePaginator
+	 */
+    public function paginate($perPage = null, $columns = ['*'], $pageName = 'page', $page = null): LengthAwarePaginator
+	{
+		return $this->query->paginate($perPage, $columns, $pageName, $page);
+	}
 }
