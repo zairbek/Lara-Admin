@@ -28,7 +28,18 @@ class PermissionSeeder extends Seeder
                 ['name' => 'create',    'title' => 'Создание'],
                 ['name' => 'edit',      'title' => 'Изменение'],
                 ['name' => 'delete',    'title' => 'Удаление'],
-            ]
+            ],
+            'roles' => [
+                ['name' => 'show',      'title' => 'Просмотр'],
+                ['name' => 'create',    'title' => 'Создание'],
+                ['name' => 'edit',      'title' => 'Изменение'],
+                ['name' => 'delete',    'title' => 'Удаление'],
+            ],
+            'permissions' => [
+                ['name' => 'show',      'title' => 'Просмотр'],
+                ['name' => 'create',    'title' => 'Создание'],
+                ['name' => 'edit',      'title' => 'Изменение'],
+            ],
         ]);
 
         $permissions->each(function ($item, $key) use ($repository) {
