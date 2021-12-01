@@ -1,17 +1,17 @@
 <?php
 
-namespace Future\LaraAdmin\Http\Requests;
+namespace Future\LaraAdmin\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreUserRequest extends FormRequest
+class UpdateUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -21,7 +21,7 @@ class StoreUserRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'first_name' => ['nullable', 'string'],
@@ -29,11 +29,11 @@ class StoreUserRequest extends FormRequest
             'second_name' => ['nullable', 'string'],
             'login' => ['nullable', 'string'],
             'phone_number' => ['nullable', 'integer'],
-            'email' => ['required','email', 'unique:users,email'],
-            'password' => ['string', 'confirmed'],
+            'email' => ['required','email', 'unique:users,email,' . $this->user->id],
+            'password' => ['nullable', 'string', 'confirmed'],
             'active' => ['nullable', 'boolean'],
             'birthday' => ['nullable', 'string', 'dateformat:Y-m-d'],
-            'roles' => ['required', 'array', 'min:1'],
+            'roles' => ['array', 'min:1'],
             'roles.*' => ['required', 'string']
         ];
     }

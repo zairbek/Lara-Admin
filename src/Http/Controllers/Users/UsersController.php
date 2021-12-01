@@ -2,9 +2,9 @@
 
 namespace Future\LaraAdmin\Http\Controllers\Users;
 
-use Future\LaraAdmin\Http\Requests\IndexUserRequest;
-use Future\LaraAdmin\Http\Requests\StoreUserRequest;
-use Future\LaraAdmin\Http\Requests\UpdateUserRequest;
+use Future\LaraAdmin\Http\Requests\User\IndexUserRequest;
+use Future\LaraAdmin\Http\Requests\User\StoreUserRequest;
+use Future\LaraAdmin\Http\Requests\User\UpdateUserRequest;
 use Illuminate\Support\Facades\DB;
 use Future\LaraAdmin\Http\Controllers\Controller;
 use Future\LaraAdmin\Models\User;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Future\LaraAdmin\Http\Requests;
+namespace Future\LaraAdmin\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
 
