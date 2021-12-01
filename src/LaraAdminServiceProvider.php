@@ -7,13 +7,17 @@ use Future\LaraAdmin\Commands\SeedUsersRolesPermissionsCommand;
 use Future\LaraAdmin\Commands\UiCommand;
 use Future\LaraAdmin\Http\Middleware\Authenticate;
 use Future\LaraAdmin\Http\Middleware\RedirectIfAuthenticated;
+use Future\LaraAdmin\Models\User;
 use Future\LaraAdmin\View\Components\Sidebar;
 use Future\LaraAdmin\View\Components\Menu;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
 use Spatie\Permission\Middlewares\PermissionMiddleware;
 use Spatie\Permission\Middlewares\RoleMiddleware;
 use Spatie\Permission\Middlewares\RoleOrPermissionMiddleware;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class LaraAdminServiceProvider extends ServiceProvider
 {
@@ -21,6 +25,7 @@ class LaraAdminServiceProvider extends ServiceProvider
 
 	public function boot()
 	{
+		$this->registerMorphMap();
 		$this->registerCommands();
 		$this->registerViews();
 		$this->registerViewComponents();
@@ -33,6 +38,19 @@ class LaraAdminServiceProvider extends ServiceProvider
 	public function register()
 	{
 		//
+	}
+
+	/**
+	 * Когда мы используем полиморфные связи, в колонку model_type записывается вот так '\Namespace\Classname'
+	 * Ниже мы переопределяем это. И теперь, если мы даже хотим переопределить класс (наследоваться), то нам нужно просто
+	 */
+	protected function registerMorphMap(): void
+	{
+		Relation::morphMap([
+			'users' => config('auth.providers.users.model'),
+			'roles' => config('permission.models.role'),
+			'permissions' => config('permission.models.permission')
+		]);
 	}
 
 	protected function registerCommands(): void
