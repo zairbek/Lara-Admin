@@ -24,7 +24,7 @@
 
                         <div class="tab-pane active" id="settings">
                             <form class="form-horizontal"
-                                  action="{{ route('future.pages.users.store') }}"
+                                  action="{{ route('future.pages.settings.users.store') }}"
                                   method="post"
                             >
                                 @csrf
@@ -139,7 +139,7 @@
 
                                 <div class="form-group row">
                                     <div class="offset-sm-2 col-sm-10">
-                                        <a href="{{ route('future.pages.users.index') }}"
+                                        <a href="{{ route('future.pages.settings.users.index') }}"
                                            class="btn btn-sm btn-default">Назад</a>
                                         <button type="submit" class="btn btn-sm btn-primary">Создать</button>
                                     </div>

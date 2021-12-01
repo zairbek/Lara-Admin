@@ -34,7 +34,7 @@ class UsersController extends Controller
             ->search($request->get('field'), $request->get('search'))
             ->paginate(50);
 
-        return view('future::pages.admin.users.index', compact('users'));
+        return view('future::pages.admin.settings.users.index', compact('users'));
     }
 
     /**
@@ -46,7 +46,7 @@ class UsersController extends Controller
     {
         $roles = $this->roleRepository->all();
 
-        return view('future::pages.admin.users.create', compact('roles'));
+        return view('future::pages.admin.settings.users.create', compact('roles'));
     }
 
     /**
@@ -63,7 +63,7 @@ class UsersController extends Controller
             $user = $this->userRepository->createUser($request->validated(), $request->roles);
 
             DB::commit();
-            return redirect(route('future.pages.users.show', $user->id));
+            return redirect(route('future.pages.settings.users.show', $user->id));
         } catch (\Exception $exception) {
             DB::rollBack();
             return back()->with('message', $exception->getMessage());
@@ -81,7 +81,7 @@ class UsersController extends Controller
         $user->load('roles');
         $roles = $this->roleRepository->all();
 
-        return view('future::pages.admin.users.show', compact('user', 'roles'));
+        return view('future::pages.admin.settings.users.show', compact('user', 'roles'));
     }
 
     /**
@@ -95,7 +95,7 @@ class UsersController extends Controller
         $user->load('roles');
         $roles = $this->roleRepository->all();
 
-        return view('future::pages.admin.users.edit', compact('user', 'roles'));
+        return view('future::pages.admin.settings.users.edit', compact('user', 'roles'));
     }
 
     /**
@@ -118,7 +118,7 @@ class UsersController extends Controller
             $user->syncRoles($params['roles']);
         });
 
-        return back()->with('message', 'ok');
+		return redirect(route('future.pages.settings.users.show', $user->id));
     }
 
     /**

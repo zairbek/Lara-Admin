@@ -10,12 +10,12 @@
     <div class="card">
         <div class="card-header">
             <div class="card-tools float-left">
-                <a href="{{ route('future.pages.users.create') }}" class="btn btn-sm btn-primary"
+                <a href="{{ route('future.pages.settings.users.create') }}" class="btn btn-sm btn-primary"
                    title="Добавить пользователя">Добавить пользователя</a>
             </div>
             <div class="card-tools">
                 <form
-                        method="get" action="{{ route('future.pages.users.index') }}"
+                        method="get" action="{{ route('future.pages.settings.users.index') }}"
                         class="input-group input-group-sm" style="width: 300px;"
                 >
                     <div class="input-group-prepend">
@@ -35,7 +35,7 @@
 
                     @if(request()->exists(['field', 'search']))
                         <div class="input-group-append">
-                            <a class="btn btn-default" href="{{ route('future.pages.users.index') }}">
+                            <a class="btn btn-default" href="{{ route('future.pages.settings.users.index') }}">
                                 <i class="fas fa-times"></i>
                             </a>
                         </div>
@@ -66,18 +66,18 @@
                 @foreach($users as $user)
                     <tr>
                         <td>
-                            <a href="{{ route('future.pages.users.show', $user->getKey()) }}">{{ $user->getKey() }}</a>
+                            <a href="{{ route('future.pages.settings.users.show', $user->getKey()) }}">{{ $user->getKey() }}</a>
                         </td>
                         <td>
-                            <a href="{{ route('future.pages.users.show', $user->getKey()) }}">{{ $user->getName() }}</a>
+                            <a href="{{ route('future.pages.settings.users.show', $user->getKey()) }}">{{ $user->getName() }}</a>
                         </td>
                         <td>
-                            <a href="{{ route('future.pages.users.show', $user->getKey()) }}">{{ $user->email }}</a>
+                            <a href="{{ route('future.pages.settings.users.show', $user->getKey()) }}">{{ $user->email }}</a>
                         </td>
                         <td><span class="tag tag-danger">{{ $user->active }}</span></td>
                         <td>{{ $user->roles->implode('title', ', ') }}</td>
                         <td>
-                            <a href="{{ route('future.pages.users.destroy', $user->getKey()) }}"
+                            <a href="{{ route('future.pages.settings.users.destroy', $user->getKey()) }}"
                                class="btn btn-sm btn-outline-danger btn-confirm" title="Удалить"
                                data-method="delete" data-title="{{ $user->getName() }}"
                             >

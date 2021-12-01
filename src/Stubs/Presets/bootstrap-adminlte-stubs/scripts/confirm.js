@@ -1,6 +1,6 @@
 /**
  * @example
- * <a href="{{ route('future.pages.users.destroy', $user->getKey()) }}"
+ * <a href="{{ route('future.pages.settings.users.destroy', $user->getKey()) }}"
  *      class="btn-confirm"
  *      data-method="delete"
  *      data-title="{{ $user->getName() }}"
