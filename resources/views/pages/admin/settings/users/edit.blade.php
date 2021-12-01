@@ -181,7 +181,7 @@
                                 <div class="form-group row">
                                     <div class="offset-sm-2 col-sm-10">
                                         <a href="{{ route('future.pages.settings.users.index') }}" class="btn btn-sm btn-default">Назад</a>
-                                        <button type="submit" class="btn btn-danger">Сохранить</button>
+                                        <button type="submit" class="btn btn-sm btn-primary">Сохранить</button>
                                     </div>
                                 </div>
                             </form>

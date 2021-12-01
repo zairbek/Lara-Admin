@@ -45,21 +45,21 @@
                                     <div class="col-sm-3">
                                         <input type="text" name="first_name"
                                                class="form-control @error('first_name') is-invalid @enderror"
-                                               placeholder="Имя" value="{{ $user->first_name }}">
+                                               placeholder="Имя" value="{{ $user->first_name }}" disabled>
                                         @error('first_name')<span
                                                 class="error invalid-feedback">{{ $message }}</span>@enderror
                                     </div>
                                     <div class="col-sm-3">
                                         <input type="text" name="last_name"
                                                class="form-control @error('last_name') is-invalid @enderror"
-                                               placeholder="Фамилия" value="{{ $user->last_name }}">
+                                               placeholder="Фамилия" value="{{ $user->last_name }}" disabled>
                                         @error('last_name')<span
                                                 class="error invalid-feedback">{{ $message }}</span>@enderror
                                     </div>
                                     <div class="col-sm-4">
                                         <input type="text" name="second_name"
                                                class="form-control @error('second_name') is-invalid @enderror"
-                                               placeholder="Отчество" value="{{ $user->second_name }}">
+                                               placeholder="Отчество" value="{{ $user->second_name }}" disabled>
                                         @error('second_name')<span
                                                 class="error invalid-feedback">{{ $message }}</span>@enderror
                                     </div>
@@ -70,7 +70,7 @@
                                     <div class="col-sm-10">
                                         <input type="email" name="email"
                                                class="form-control @error('email') is-invalid @enderror" id="inputEmail"
-                                               placeholder="Email" value="{{ $user->email }}">
+                                               placeholder="Email" value="{{ $user->email }}" disabled>
                                         @error('email')<span
                                                 class="error invalid-feedback">{{ $message }}</span>@enderror
                                     </div>
@@ -80,7 +80,7 @@
                                     <div class="col-sm-10">
                                         <input type="text" name="login"
                                                class="form-control @error('login') is-invalid @enderror" id="inputName2"
-                                               placeholder="Логин" value="{{ $user->login }}">
+                                               placeholder="Логин" value="{{ $user->login }}" disabled>
                                         @error('login')<span
                                                 class="error invalid-feedback">{{ $message }}</span>@enderror
                                     </div>
@@ -90,13 +90,13 @@
                                     <div class="col-sm-5">
                                         <input type="password" name="password"
                                                class="form-control @error('password') is-invalid @enderror"
-                                               placeholder="Придумайте пароль">
+                                               placeholder="Придумайте пароль" disabled>
                                         @error('password')<span
                                                 class="error invalid-feedback">{{ $message }}</span>@enderror
                                     </div>
                                     <div class="col-sm-5">
                                         <input type="password" name="password_confirmation" class="form-control"
-                                               placeholder="Подтвердите пароль">
+                                               placeholder="Подтвердите пароль" disabled>
                                     </div>
                                 </div>
 
@@ -105,6 +105,7 @@
                                     <div class="col-sm-10">
                                         <input type="text" name="phone_number"
                                                class="form-control @error('phone_number') is-invalid @enderror"
+                                               disabled
                                                placeholder="Телефон номер" value="{{ $user->phone_number }}">
                                         @error('phone_number')<span
                                                 class="error invalid-feedback">{{ $message }}</span>@enderror
@@ -115,7 +116,7 @@
                                     <div class="col-sm-10">
                                         <input type="date" name="birthday"
                                                class="form-control @error('birthday') is-invalid @enderror"
-                                               placeholder="Дата рождение"
+                                               placeholder="Дата рождение" disabled
                                                value="{{ $user->birthday?->format('Y-m-d') }}">
                                         @error('birthday')<span
                                                 class="error invalid-feedback">{{ $message }}</span>@enderror
@@ -127,7 +128,7 @@
                                         <div class="checkbox">
                                             <label>
                                                 <input name="active" type="checkbox" @if($user->active) value="1"
-                                                       checked="checked" @else value="0" @endif> Активность
+                                                       checked="checked" @else value="0" @endif disabled> Активность
                                             </label>
                                         </div>
                                     </div>
@@ -137,7 +138,7 @@
                                     <label class="col-sm-2 col-form-label">Группы</label>
                                     <div class="col-sm-10">
                                         <select multiple name="roles[]"
-                                                class="form-control @error('roles') is-invalid @enderror">
+                                                class="form-control @error('roles') is-invalid @enderror" disabled>
                                             @foreach($roles as $role)
                                                 <option value="{{ $role->name }}"
                                                         @if($user->hasRole($role)) selected @endif>{{ $role->title }}</option>
