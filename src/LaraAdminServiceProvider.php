@@ -43,6 +43,7 @@ class LaraAdminServiceProvider extends ServiceProvider
 	/**
 	 * Когда мы используем полиморфные связи, в колонку model_type записывается вот так '\Namespace\Classname'
 	 * Ниже мы переопределяем это. И теперь, если мы даже хотим переопределить класс (наследоваться), то нам нужно просто
+	 * @url https://laravel.com/docs/8.x/eloquent-relationships#custom-polymorphic-types
 	 */
 	protected function registerMorphMap(): void
 	{
