@@ -125,7 +125,7 @@ class RolesController extends Controller
             DB::commit();
             return redirect(route('future.pages.settings.roles.show', $role->id));
         } catch (\Exception $exception) {
-
+			DB::rollBack();
             return back()->with('error', $exception->getMessage());
         }
     }
