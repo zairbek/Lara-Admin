@@ -42,19 +42,19 @@ class Menu extends Component
                         new MenuItem(
                             title: 'Пользователи',
                             active: true,
-                            link: '/admin/users',
+                            link: '/admin/settings/users',
                             icon: 'fas fa-user'
                         ),
                         new MenuItem(
                             title: 'Группы',
                             active: false,
-                            link: '/',
+                            link: '/admin/settings/roles',
                             icon: 'fas fa-users'
                         ),
                         new MenuItem(
                             title: 'Доступы',
                             active: false,
-                            link: '/',
+                            link: '/admin/settings/permissions',
                             icon: 'fas fa-user-lock'
                         )
                     ])
