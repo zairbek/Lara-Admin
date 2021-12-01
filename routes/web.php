@@ -3,6 +3,7 @@
 use Future\LaraAdmin\Http\Controllers\Auth\ForgotPasswordController;
 use Future\LaraAdmin\Http\Controllers\Auth\ResetPasswordController;
 use Future\LaraAdmin\Http\Controllers\Auth\SignInController;
+use Future\LaraAdmin\Http\Controllers\Permissions\PermissionsController;
 use Future\LaraAdmin\Http\Controllers\Roles\RolesController;
 use Future\LaraAdmin\Http\Controllers\Users\UsersController;
 use Illuminate\Support\Facades\Route;
@@ -29,6 +30,7 @@ Route::group(['middleware' => 'web'], function () {
 			Route::put('users/{user}/avatar', [UsersController::class, 'avatarUpdate'])->name('future.pages.settings.users.avatar.update');
 
 			Route::resource('roles', RolesController::class)->names('future.pages.settings.roles');
+			Route::resource('permissions', PermissionsController::class)->names('future.pages.settings.permissions')->except('destroy');
 		});
 	});
 });
