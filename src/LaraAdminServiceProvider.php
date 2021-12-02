@@ -3,6 +3,7 @@
 namespace Future\LaraAdmin;
 
 use Future\LaraAdmin\Commands\FutureCommand;
+use Future\LaraAdmin\Commands\PublishResourcesCommand;
 use Future\LaraAdmin\Commands\SeedUsersRolesPermissionsCommand;
 use Future\LaraAdmin\Commands\UiCommand;
 use Future\LaraAdmin\Http\Middleware\Authenticate;
@@ -61,6 +62,7 @@ class LaraAdminServiceProvider extends ServiceProvider
 				FutureCommand::class,
 				UiCommand::class,
 				SeedUsersRolesPermissionsCommand::class,
+				PublishResourcesCommand::class,
 			]);
 		}
 	}
@@ -82,19 +84,31 @@ class LaraAdminServiceProvider extends ServiceProvider
 	{
 		$this->publishes([
 			__DIR__.'/../resources/views' => resource_path('views/vendor/future'),
-		], 'future:views:all');
-
+		], 'future::views.all');
 		$this->publishes([
 			__DIR__.'/../resources/views/layouts' => resource_path('views/vendor/future/layouts'),
-		], 'future:views:layouts');
-
+		], 'future::views.layouts');
 		$this->publishes([
 			__DIR__.'/../resources/views/components' => resource_path('views/vendor/future/components'),
-		], 'future:views:components');
-
+		], 'future::views.components');
+		$this->publishes([
+			__DIR__.'/../resources/views/pages/admin' => resource_path('views/vendor/future/pages/admin'),
+		], 'future::views.pages.admin');
+		$this->publishes([
+			__DIR__.'/../resources/views/pages/admin/index.blade.php' => resource_path('views/vendor/future/pages/admin/index.blade.php'),
+		], 'future::views.pages.admin.index');
 		$this->publishes([
 			__DIR__.'/../resources/views/pages/admin/auth' => resource_path('views/vendor/future/pages/admin/auth'),
-		], 'future:views:admin-auth');
+		], 'future::views.pages.admin.auth');
+		$this->publishes([
+			__DIR__.'/../resources/views/pages/admin/settings/permissions' => resource_path('views/vendor/future/pages/admin/settings/permissions'),
+		], 'future::views.pages.admin.permissions');
+		$this->publishes([
+			__DIR__.'/../resources/views/pages/admin/settings/roles' => resource_path('views/vendor/future/pages/admin/settings/roles'),
+		], 'future::views.pages.admin.roles');
+		$this->publishes([
+			__DIR__.'/../resources/views/pages/admin/settings/users' => resource_path('views/vendor/future/pages/admin/settings/users'),
+		], 'future::views.pages.admin.users');
 	}
 
 	protected function registerRoutes(): void

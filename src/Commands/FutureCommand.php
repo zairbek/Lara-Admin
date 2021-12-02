@@ -21,6 +21,14 @@ class FutureCommand extends Command
 
 		$this->call('config:clear');
 
-		$this->info('ура');
+		if ($this->confirm('Выполняем миграцию?')) {
+			$this->call('migrate');
+		}
+
+		if ($this->confirm('Создаем пользователей? (Группы и доступов)')) {
+			$this->call('future:seed');
+		}
+
+		$this->call('future:publish');
 	}
 }
