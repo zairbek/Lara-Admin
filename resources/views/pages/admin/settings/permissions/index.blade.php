@@ -57,9 +57,9 @@
                 <tbody>
                 @foreach($permissions as $permission)
                     <tr>
-                        <td><a href="{{ route('future.pages.settings.roles.show', $permission->getKey()) }}">{{ $permission->getKey() }}</a></td>
-                        <td><a href="{{ route('future.pages.settings.roles.show', $permission->getKey()) }}">{{ $permission->title }}</a></td>
-                        <td><a href="{{ route('future.pages.settings.roles.show', $permission->getKey()) }}">{{ $permission->name }}</a></td>
+                        <td><a href="{{ route('future.pages.settings.permissions.show', $permission->getKey()) }}">{{ $permission->getKey() }}</a></td>
+                        <td><a href="{{ route('future.pages.settings.permissions.show', $permission->getKey()) }}">{{ $permission->title }}</a></td>
+                        <td><a href="{{ route('future.pages.settings.permissions.show', $permission->getKey()) }}">{{ $permission->name }}</a></td>
                     </tr>
                 @endforeach
                 </tbody>

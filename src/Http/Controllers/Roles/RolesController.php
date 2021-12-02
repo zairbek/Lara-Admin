@@ -125,8 +125,8 @@ class RolesController extends Controller
 	 * @param Role $role
 	 * @return Application|Redirector|RedirectResponse
 	 */
-    public function update(UpdateRoleRequest $request, Role $role)
-    {
+    public function update(UpdateRoleRequest $request, Role $role): Redirector|RedirectResponse|Application
+	{
         DB::beginTransaction();
         try {
             $role->fill($request->validated())->save();
@@ -135,8 +135,8 @@ class RolesController extends Controller
                 return $status === 'on' ? $name : false;
             });
 
-            $role->givePermissionTo($permissions);
-            DB::commit();
+			$role->syncPermissions($permissions);
+			DB::commit();
             return redirect(route('future.pages.settings.roles.show', $role->id));
         } catch (\Exception $exception) {
 			DB::rollBack();
