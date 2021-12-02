@@ -16,9 +16,16 @@ class FutureCommand extends Command
 
 		$this->call('vendor:publish', ['--provider' => 'Spatie\MediaLibrary\MediaLibraryServiceProvider', '--tag' => 'migrations']);
 		$this->call('vendor:publish', ['--provider' => 'Spatie\MediaLibrary\MediaLibraryServiceProvider', '--tag' => 'config']);
-		$this->call('vendor:publish', ['--provider' => 'Future\LaraAdmin\LaraAdminServiceProvider', '--tag' => 'migrations']);
-		$this->call('vendor:publish', ['--provider' => 'Spatie\Permission\PermissionServiceProvider']);
 
+
+		if ($this->confirm('Переименовать старую таблицу users? (yes=переименовать|no=удалить)', true)) {
+			$this->call('vendor:publish', ['--provider' => 'Future\LaraAdmin\LaraAdminServiceProvider', '--tag' => 'migrations:create_future_users_table.rename_old_users_table']);
+		} else {
+			$this->call('vendor:publish', ['--provider' => 'Future\LaraAdmin\LaraAdminServiceProvider', '--tag' => 'migrations:create_future_users_table.drop_old_users_table']);
+		}
+
+		$this->call('vendor:publish', ['--provider' => 'Future\LaraAdmin\LaraAdminServiceProvider', '--tag' => 'migrations:update_permissions_table']);
+		$this->call('vendor:publish', ['--provider' => 'Spatie\Permission\PermissionServiceProvider']);
 		$this->call('config:clear');
 
 		if ($this->confirm('Выполняем миграцию?')) {

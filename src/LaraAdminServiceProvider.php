@@ -8,7 +8,6 @@ use Future\LaraAdmin\Commands\SeedUsersRolesPermissionsCommand;
 use Future\LaraAdmin\Commands\UiCommand;
 use Future\LaraAdmin\Http\Middleware\Authenticate;
 use Future\LaraAdmin\Http\Middleware\RedirectIfAuthenticated;
-use Future\LaraAdmin\Models\User;
 use Future\LaraAdmin\View\Components\Sidebar;
 use Future\LaraAdmin\View\Components\Menu;
 use Illuminate\Database\Eloquent\Relations\Relation;
@@ -17,8 +16,6 @@ use Illuminate\Support\ServiceProvider;
 use Spatie\Permission\Middlewares\PermissionMiddleware;
 use Spatie\Permission\Middlewares\RoleMiddleware;
 use Spatie\Permission\Middlewares\RoleOrPermissionMiddleware;
-use Spatie\Permission\Models\Permission;
-use Spatie\Permission\Models\Role;
 
 class LaraAdminServiceProvider extends ServiceProvider
 {
@@ -128,16 +125,25 @@ class LaraAdminServiceProvider extends ServiceProvider
 
 	protected function registerMigrations(): void
 	{
-		$this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
-
 		// Export the migration
 		if ($this->app->runningInConsole()) {
-			if (! class_exists('CreatePostsTable')) {
+			if (! class_exists('FutureUsersTable')) {
 				$this->publishes([
-					__DIR__ . '/../database/migrations/future_users_table.php.stub' => database_path('migrations/' . date('Y_m_d_His', time()) . '_future_users_table.php'),
+					__DIR__ . '/../database/migrations/future_users_table.php.default.stub' => database_path('migrations/' . date('Y_m_d_His', time()) . '_future_users_table.php'),
+					// you can add any number of migrations here
+				], 'migrations:create_future_users_table.rename_old_users_table');
+			}
+			if (! class_exists('FutureUsersTable')) {
+				$this->publishes([
+					__DIR__ . '/../database/migrations/future_users_table.php.drop.stub' => database_path('migrations/' . date('Y_m_d_His', time()) . '_future_users_table.php'),
+					// you can add any number of migrations here
+				], 'migrations:create_future_users_table.drop_old_users_table');
+			}
+			if (! class_exists('UpdatePermissionTables')) {
+				$this->publishes([
 					__DIR__ . '/../database/migrations/update_permission_tables.php.stub' => database_path('migrations/' . date('Y_m_d_His', time()) . '_update_permission_tables.php'),
 					// you can add any number of migrations here
-				], 'migrations');
+				], 'migrations:update_permissions_table');
 			}
 		}
 	}
