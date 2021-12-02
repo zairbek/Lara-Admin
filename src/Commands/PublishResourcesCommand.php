@@ -25,7 +25,7 @@ class PublishResourcesCommand extends Command
 	protected function asking(): array
 	{
 		return $this->choice(
-			'Выберите из списка один или несколько шаблонов, которые хотите опубликовать):',
+			'Выберите из списка один или несколько шаблонов, которые хотите опубликовать. (Пример: 1 или 1,2,3):',
 			[
 				'future::views.all',
 				'future::views.layouts',

@@ -25,7 +25,7 @@ class FutureCommand extends Command
 			$this->call('migrate');
 		}
 
-		if ($this->confirm('Создаем пользователей? (Группы и доступов)')) {
+		if ($this->confirm('Создаем пользователей? (Группы и доступы)')) {
 			$this->call('future:seed');
 		}
 
