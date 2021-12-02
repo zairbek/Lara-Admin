@@ -12,8 +12,6 @@ class FutureCommand extends Command
 
 	public function handle(): void
 	{
-		$this->exportBackend();
-
 		$this->call('future:ui');
 
 		$this->call('vendor:publish', ['--provider' => 'Spatie\MediaLibrary\MediaLibraryServiceProvider', '--tag' => 'migrations']);
@@ -24,14 +22,5 @@ class FutureCommand extends Command
 		$this->call('config:clear');
 
 		$this->info('ура');
-	}
-
-	protected function exportBackend(): void
-	{
-		file_put_contents(
-			base_path('routes/web.php'),
-			file_get_contents(__DIR__.'/../Stubs/routes.stub'),
-			FILE_APPEND
-		);
 	}
 }

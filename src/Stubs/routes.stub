@@ -1,2 +1,1 @@
 
-Route::get('/', fn() => view('future::pages.index'))->name('index');
