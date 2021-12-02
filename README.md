@@ -1,7 +1,7 @@
 # Laravel Admin
 
 ## Вступление
-> Laravel пакет для быстрого развертывания авторизацию.
+> Laravel пакет для быстрого развертывания админку.
 
 ## Todo
 - [ ] нужно для всех контроллеров повесить событий (до, после и во время)
@@ -9,21 +9,21 @@
 - [ ] Установить статические анализаторы (phpstan, phpcs ...)
 - [ ] Дописать тесты (Unit)
 - [ ] Дописать ответы ошибок - swagger документация (docs/swagger.json)
-- [ ] Нужно перенести на gitlab
 - [ ] Написать CI/CD
     - [ ] Запускать тесты
-    - [ ] Публикация в Package Registry (Packages & Registries -> Package Registry)
 
-## API документация
-Api документация написано на swagger-e  
-Документация docs/swagger.json
+[comment]: <> (## API документация)
+
+[comment]: <> (Api документация написано на swagger-e  )
+
+[comment]: <> (Документация docs/swagger.json)
 
 ## Установка
 Так как наш репозиторий является приватным, нам сначала нужно авторизоваться в композере:
 1. Нам нужно получить access token от gitlab    
-   ![Настройки](docs/img/img.png)
-   ![Настройки](docs/img/img_1.png)
-   ![Настройки](docs/img/img_2.png)
+   ![Настройки](docs/img/img.png)   
+   ![Настройки](docs/img/img_1.png) 
+   ![Настройки](docs/img/img_2.png) 
 
 2. Авторизуемся:
 ```bash
@@ -43,15 +43,7 @@ composer req future/lara-admin:0.1.0
 ```
 > Примеры взято из Packages & Registries -> Package Registry
 
-4. Публикуем пакеты js, js, scss файлы конфигурации необходимые для развёртывания админки
-```bash
-php artisan future:install
-```
-```bash
-npm install && npm run production
-```
-
-Откройте файл `config/auth.php`, измените значение `model` на `\Future\LaraAdmin\Models\User::class`:
+4. Откройте файл `config/auth.php`, измените значение `model` на `\Future\LaraAdmin\Models\User::class`:
 ```php
     'users' => [
         'driver' => 'eloquent',
@@ -59,22 +51,103 @@ npm install && npm run production
     ],
 ```
 
-Выполните миграцию
+5. Публикуем пакеты js, js, scss файлы конфигурации необходимые для развёртывания админки
 ```bash
-php artisan migrate
+php artisan future:install
+```
+```bash
+npm install && npm run production
 ```
 
-Это команда создаст ролей, доступов и пользователей 
-```php
-php artisan future:seed
-```
+
+
+[comment]: <> (Выполните миграцию)
+
+[comment]: <> (```bash)
+
+[comment]: <> (php artisan migrate)
+
+[comment]: <> (```)
+
+[comment]: <> (Это команда создаст ролей, доступов и пользователей )
+
+[comment]: <> (```bash)
+
+[comment]: <> (php artisan future:seed)
+
+[comment]: <> (```)
 
 
 5. Готово.
 
 
-## Расширенное использование
+# Что содержит пакет:
 
-```bash
-php artisan vendor:publish
+## Зависимости:
+
+- `spatie/laravel-permission` для ролей и доступов
+- `spatie/laravel-medialibrary` для работы с файлами
+
+## Миграции
+
+- `database/migrations/future_users_table.php.default.stub` 
+  - миграция таблицы `users` с переименованием старого таблицы `users` на `__users`
+  - публикуется при запуске команды `php artisan future:install`
+- `database/migrations/future_users_table.php.drop.stub`
+  - миграция таблицы `users` с удалением старого таблицы `users`
+  - публикуется при запуске команды `php artisan future:install`
+- `database/migrations/update_permission_tables.php.stub` 
+  - Добавляет в таблицу `permissions, roles` колонку `title`
+  - публикуется при запуске команды `php artisan future:install`
+    
+## Seeders
+
+- Запускается по команде `php artisan future:install`
+- Можно перезапустить по команде `php artisan future:seed`
+- `database/seeders/GivePermissionSeeder.php` Привязывает доступов с ролями
+- `database/seeders/PermissionSeeder.php` Создает доступов
+- `database/seeders/RoleSeeder.php` Создает ролей
+- `database/seeders/UserSeeder.php` Создает пользователей и привязывает с ролями
+
+## Views (Шаблоны)
+
+- Если придется в шаблоне что-то менять, то нужно опубликовать
+- Опубликовать можно так: `php artisan future:publish`
+
+### Структура шаблонов
+```
+resources
+└── views
+    ├── components
+    │   ├── menu.blade.php
+    │   ├── pagination
+    │   │   └── default.blade.php
+    │   └── sidebar.blade.php
+    ├── layouts
+    │   ├── admin.blade.php
+    │   └── auth.blade.php
+    └── pages
+        ├── admin
+        │   ├── auth
+        │   │   ├── forgot-password.blade.php
+        │   │   ├── recover-password.blade.php
+        │   │   └── sign-in.blade.php
+        │   ├── index.blade.php
+        │   └── settings
+        │       ├── permissions
+        │       │   ├── create.blade.php
+        │       │   ├── edit.blade.php
+        │       │   ├── index.blade.php
+        │       │   └── show.blade.php
+        │       ├── roles
+        │       │   ├── create.blade.php
+        │       │   ├── edit.blade.php
+        │       │   ├── index.blade.php
+        │       │   └── show.blade.php
+        │       └── users
+        │           ├── create.blade.php
+        │           ├── edit.blade.php
+        │           ├── index.blade.php
+        │           └── show.blade.php
+        └── index.blade.php
 ```
