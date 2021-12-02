@@ -1,10 +1,10 @@
 <?php
 
-namespace Future\LaraAdmin\Http\Requests\Permission;
+namespace Future\LaraAdmin\Http\Requests\Role;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdatePermissionRequest extends FormRequest
+class DeleteRoleRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class UpdatePermissionRequest extends FormRequest
      */
     public function authorize()
     {
-		return $this->user()->hasPermissionTo('permissions@edit');
+        return $this->user()->hasPermissionTo('roles@delete');
     }
 
     /**
@@ -24,7 +24,7 @@ class UpdatePermissionRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => ['required', 'string']
+        	//
         ];
     }
 }

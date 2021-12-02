@@ -4,7 +4,7 @@ namespace Future\LaraAdmin\Http\Requests\Permission;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdatePermissionRequest extends FormRequest
+class IndexPermissionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class UpdatePermissionRequest extends FormRequest
      */
     public function authorize()
     {
-		return $this->user()->hasPermissionTo('permissions@edit');
+        return $this->user()->hasPermissionTo('permissions@show');
     }
 
     /**
@@ -24,7 +24,7 @@ class UpdatePermissionRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => ['required', 'string']
+        	//
         ];
     }
 }

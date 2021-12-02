@@ -2,34 +2,50 @@
 
 namespace Future\LaraAdmin\Http\Controllers\Users;
 
+use Future\LaraAdmin\Http\Requests\User\CreateUserRequest;
+use Future\LaraAdmin\Http\Requests\User\DeleteUserRequest;
+use Future\LaraAdmin\Http\Requests\User\EditUserRequest;
 use Future\LaraAdmin\Http\Requests\User\IndexUserRequest;
+use Future\LaraAdmin\Http\Requests\User\ShowUserRequest;
 use Future\LaraAdmin\Http\Requests\User\StoreUserRequest;
 use Future\LaraAdmin\Http\Requests\User\UpdateUserRequest;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\DB;
 use Future\LaraAdmin\Http\Controllers\Controller;
 use Future\LaraAdmin\Models\User;
 use Future\LaraAdmin\Repositories\RoleRepository;
 use Future\LaraAdmin\Repositories\UserRepository;
 use Illuminate\Http\Request;
+use Throwable;
 
 class UsersController extends Controller
 {
     private RoleRepository $roleRepository;
     private UserRepository $userRepository;
 
+	/**
+	 * UsersController constructor.
+	 * @param RoleRepository $roleRepository
+	 * @param UserRepository $userRepository
+	 */
     public function __construct(RoleRepository $roleRepository, UserRepository $userRepository)
     {
         $this->roleRepository = $roleRepository;
         $this->userRepository = $userRepository;
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
-     */
-    public function index(IndexUserRequest $request)
-    {
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @param IndexUserRequest $request
+	 * @return Application|Factory|View
+	 */
+    public function index(IndexUserRequest $request): View|Factory|Application
+	{
         $users = $this->userRepository
             ->search($request->get('field'), $request->get('search'))
             ->paginate(50);
@@ -37,13 +53,14 @@ class UsersController extends Controller
         return view('future::pages.admin.settings.users.index', compact('users'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
-     */
-    public function create()
-    {
+	/**
+	 * Show the form for creating a new resource.
+	 *
+	 * @param CreateUserRequest $request
+	 * @return Application|Factory|View
+	 */
+    public function create(CreateUserRequest $request): View|Factory|Application
+	{
         $roles = $this->roleRepository->all();
 
         return view('future::pages.admin.settings.users.create', compact('roles'));
@@ -52,12 +69,12 @@ class UsersController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \App\Http\Requests\StoreUserRequest $request
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
-     * @throws \Throwable
+     * @param StoreUserRequest $request
+     * @return Application|RedirectResponse|Redirector
+     * @throws Throwable
      */
-    public function store(StoreUserRequest $request)
-    {
+    public function store(StoreUserRequest $request): Redirector|RedirectResponse|Application
+	{
         DB::beginTransaction();
         try {
             $user = $this->userRepository->createUser($request->validated(), $request->roles);
@@ -70,28 +87,30 @@ class UsersController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param \Future\LaraAdmin\Models\User $user
-     * @return \Illuminate\Http\Response
-     */
-    public function show(User $user)
-    {
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param ShowUserRequest $request
+	 * @param User $user
+	 * @return Application|Factory|View
+	 */
+    public function show(ShowUserRequest $request, User $user): View|Factory|Application
+	{
         $user->load('roles');
         $roles = $this->roleRepository->all();
 
         return view('future::pages.admin.settings.users.show', compact('user', 'roles'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param User $user
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
-     */
-    public function edit(User $user)
-    {
+	/**
+	 * Show the form for editing the specified resource.
+	 *
+	 * @param EditUserRequest $request
+	 * @param User $user
+	 * @return Application|Factory|View
+	 */
+    public function edit(EditUserRequest $request, User $user): View|Factory|Application
+	{
         $user->load('roles');
         $roles = $this->roleRepository->all();
 
@@ -101,13 +120,13 @@ class UsersController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \App\Http\Requests\UpdateUserRequest $request
-     * @param \Future\LaraAdmin\Models\User $user
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Throwable
+     * @param UpdateUserRequest $request
+     * @param User $user
+     * @return RedirectResponse
+     * @throws Throwable
      */
-    public function update(UpdateUserRequest $request, User $user)
-    {
+    public function update(UpdateUserRequest $request, User $user): RedirectResponse
+	{
         $params = $request->validated();
         if (! $request->get('password')) {
             $params = $request->except('password');
@@ -121,14 +140,15 @@ class UsersController extends Controller
 		return redirect(route('future.pages.settings.users.show', $user->id));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param \Future\LaraAdmin\Models\User $user
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function destroy(User $user)
-    {
+	/**
+	 * Remove the specified resource from storage.
+	 *
+	 * @param DeleteUserRequest $request
+	 * @param User $user
+	 * @return RedirectResponse
+	 */
+    public function destroy(DeleteUserRequest $request, User $user): RedirectResponse
+	{
         $user->delete();
 
         return back();
@@ -137,10 +157,10 @@ class UsersController extends Controller
     /**
      * @param Request $request
      * @param User $user
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
-    public function avatarUpdate(Request $request, User $user)
-    {
+    public function avatarUpdate(Request $request, User $user): RedirectResponse
+	{
         $request->validate([
             'avatar' => ['required', 'mimetypes:image/jpeg,image/png', 'max:10000']
         ]);

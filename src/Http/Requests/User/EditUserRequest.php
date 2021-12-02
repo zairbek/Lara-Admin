@@ -1,19 +1,19 @@
 <?php
 
-namespace Future\LaraAdmin\Http\Requests\Permission;
+namespace Future\LaraAdmin\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdatePermissionRequest extends FormRequest
+class EditUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
-		return $this->user()->hasPermissionTo('permissions@edit');
+		return $this->user()->hasPermissionTo('users@edit');
     }
 
     /**
@@ -21,10 +21,10 @@ class UpdatePermissionRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            'title' => ['required', 'string']
+        	//
         ];
     }
 }

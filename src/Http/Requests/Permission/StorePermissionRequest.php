@@ -13,7 +13,7 @@ class StorePermissionRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return $this->user()->hasPermissionTo('permissions@create');
     }
 
     /**

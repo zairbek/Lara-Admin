@@ -3,6 +3,10 @@
 namespace Future\LaraAdmin\Http\Controllers\Permissions;
 
 use Future\LaraAdmin\Http\Controllers\Controller;
+use Future\LaraAdmin\Http\Requests\Permission\CreatePermissionRequest;
+use Future\LaraAdmin\Http\Requests\Permission\EditPermissionRequest;
+use Future\LaraAdmin\Http\Requests\Permission\IndexPermissionRequest;
+use Future\LaraAdmin\Http\Requests\Permission\ShowPermissionRequest;
 use Future\LaraAdmin\Http\Requests\Permission\StorePermissionRequest;
 use Future\LaraAdmin\Http\Requests\Permission\UpdatePermissionRequest;
 use Future\LaraAdmin\Repositories\PermissionRepository;
@@ -10,27 +14,32 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Permission;
+use Throwable;
 
 class PermissionsController extends Controller
 {
     private PermissionRepository $permissionRepository;
 
+	/**
+	 * PermissionsController constructor.
+	 * @param PermissionRepository $permissionRepository
+	 */
     public function __construct(PermissionRepository $permissionRepository)
     {
         $this->permissionRepository = $permissionRepository;
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Application|Factory|View
-     */
-    public function index(Request $request)
-    {
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @param IndexPermissionRequest $request
+	 * @return Application|Factory|View
+	 */
+    public function index(IndexPermissionRequest $request): View|Factory|Application
+	{
         $permissions = $this->permissionRepository
             ->search($request->get('field'), $request->get('search'))
             ->paginate(50);
@@ -38,13 +47,14 @@ class PermissionsController extends Controller
         return view('future::pages.admin.settings.permissions.index', compact('permissions'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Application|Factory|View
-     */
-    public function create()
-    {
+	/**
+	 * Show the form for creating a new resource.
+	 *
+	 * @param CreatePermissionRequest $request
+	 * @return Application|Factory|View
+	 */
+    public function create(CreatePermissionRequest $request): View|Factory|Application
+	{
         return view('future::pages.admin.settings.permissions.create');
     }
 
@@ -53,10 +63,10 @@ class PermissionsController extends Controller
      *
      * @param StorePermissionRequest $request
      * @return Application|RedirectResponse|Redirector
-     * @throws \Throwable
+     * @throws Throwable
      */
-    public function store(StorePermissionRequest $request)
-    {
+    public function store(StorePermissionRequest $request): Redirector|RedirectResponse|Application
+	{
         DB::beginTransaction();
         try {
             $permission = $this->permissionRepository->create($request->get('title'), $request->get('name'));
@@ -68,25 +78,28 @@ class PermissionsController extends Controller
             return back()->with('error', $exception->getMessage());
         }
     }
-    /**
-     * Display the specified resource.
-     *
-     * @param Permission $permission
-     * @return Application|Factory|View
-     */
-    public function show(Permission $permission)
-    {
+
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param ShowPermissionRequest $request
+	 * @param Permission $permission
+	 * @return Application|Factory|View
+	 */
+    public function show(ShowPermissionRequest $request, Permission $permission): View|Factory|Application
+	{
         return view('future::pages.admin.settings.permissions.show', compact('permission'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param Permission $permission
-     * @return Application|Factory|View
-     */
-    public function edit(Permission $permission)
-    {
+	/**
+	 * Show the form for editing the specified resource.
+	 *
+	 * @param EditPermissionRequest $request
+	 * @param Permission $permission
+	 * @return Application|Factory|View
+	 */
+    public function edit(EditPermissionRequest $request, Permission $permission): View|Factory|Application
+	{
         return view('future::pages.admin.settings.permissions.edit', compact( 'permission'));
     }
 
@@ -96,10 +109,10 @@ class PermissionsController extends Controller
      * @param UpdatePermissionRequest $request
      * @param Permission $permission
      * @return Application|Redirector|RedirectResponse
-     * @throws \Throwable
+     * @throws Throwable
      */
-    public function update(UpdatePermissionRequest $request, Permission $permission)
-    {
+    public function update(UpdatePermissionRequest $request, Permission $permission): Redirector|RedirectResponse|Application
+	{
         DB::beginTransaction();
         try {
             $permission->fill($request->validated())->save();

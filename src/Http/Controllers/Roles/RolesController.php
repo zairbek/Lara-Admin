@@ -3,6 +3,11 @@
 namespace Future\LaraAdmin\Http\Controllers\Roles;
 
 use Future\LaraAdmin\Http\Controllers\Controller;
+use Future\LaraAdmin\Http\Requests\Role\CreateRoleRequest;
+use Future\LaraAdmin\Http\Requests\Role\DeleteRoleRequest;
+use Future\LaraAdmin\Http\Requests\Role\EditRoleRequest;
+use Future\LaraAdmin\Http\Requests\Role\IndexRoleRequest;
+use Future\LaraAdmin\Http\Requests\Role\ShowRoleRequest;
 use Future\LaraAdmin\Http\Requests\Role\StoreRoleRequest;
 use Future\LaraAdmin\Http\Requests\Role\UpdateRoleRequest;
 use Illuminate\Contracts\Foundation\Application;
@@ -21,19 +26,25 @@ class RolesController extends Controller
     private RoleRepository $roleRepository;
     private PermissionRepository $permissionRepository;
 
+	/**
+	 * RolesController constructor.
+	 * @param RoleRepository $roleRepository
+	 * @param PermissionRepository $permissionRepository
+	 */
     public function __construct(RoleRepository $roleRepository, PermissionRepository $permissionRepository)
     {
         $this->roleRepository = $roleRepository;
         $this->permissionRepository = $permissionRepository;
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Application|Factory|View
-     */
-    public function index(Request $request)
-    {
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @param IndexRoleRequest $request
+	 * @return Application|Factory|View
+	 */
+    public function index(IndexRoleRequest $request): View|Factory|Application
+	{
         $roles = $this->roleRepository
             ->search($request->get('field'), $request->get('search'))
             ->paginate(50);
@@ -41,13 +52,14 @@ class RolesController extends Controller
         return view('future::pages.admin.settings.roles.index', compact('roles'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Application|Factory|View
+	/**
+	 * Show the form for creating a new resource.
+	 *
+	 * @param CreateRoleRequest $request
+	 * @return Application|Factory|View
 	 */
-    public function create()
-    {
+    public function create(CreateRoleRequest $request): View|Factory|Application
+	{
         $permissions = $this->permissionRepository->all();
 
         return view('future::pages.admin.settings.roles.create', compact('permissions'));
@@ -81,11 +93,12 @@ class RolesController extends Controller
 	/**
 	 * Display the specified resource.
 	 *
+	 * @param ShowRoleRequest $request
 	 * @param Role $role
 	 * @return Application|Factory|View
 	 */
-    public function show(Role $role)
-    {
+    public function show(ShowRoleRequest $request, Role $role): View|Factory|Application
+	{
         $permissions = $this->permissionRepository->all();
 
         return view('future::pages.admin.settings.roles.show', compact('role', 'permissions'));
@@ -94,11 +107,12 @@ class RolesController extends Controller
 	/**
 	 * Show the form for editing the specified resource.
 	 *
+	 * @param EditRoleRequest $request
 	 * @param Role $role
 	 * @return Application|Factory|View
 	 */
-    public function edit(Role $role)
-    {
+    public function edit(EditRoleRequest $request, Role $role): View|Factory|Application
+	{
         $permissions = $this->permissionRepository->all();
 
         return view('future::pages.admin.settings.roles.edit', compact('role', 'permissions'));
@@ -133,11 +147,12 @@ class RolesController extends Controller
 	/**
 	 * Remove the specified resource from storage.
 	 *
+	 * @param DeleteRoleRequest $request
 	 * @param Role $role
 	 * @return RedirectResponse
 	 */
-    public function destroy(Role $role)
-    {
+    public function destroy(DeleteRoleRequest $request, Role $role): RedirectResponse
+	{
         $role->delete();
 
         return back()->with('message', 'success');
