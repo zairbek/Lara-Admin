@@ -1,4 +1,3 @@
-# Laravel Admin
 ## Зависимости
 
 - `spatie/laravel-permission` для ролей и доступов
