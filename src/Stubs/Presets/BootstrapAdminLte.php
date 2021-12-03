@@ -81,7 +81,7 @@ class BootstrapAdminLte extends Preset
 
 		if (
 			file_exists($imgDir)
-			&& $command->confirm("The [{$imgDir}] view already exists. Do you want to replace it?")
+			&& $command->confirm("Папка [{$imgDir}] уже существует. Вы хотите заменить это?")
 		) {
 			rmdir($imgDir);
 		}
