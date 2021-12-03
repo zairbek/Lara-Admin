@@ -1,5 +1,5 @@
 module.exports = {
-	base: '',
+	base: '/',
 	title: 'Laravel Admin',
 	description: '',
 	host: 'localhost',
