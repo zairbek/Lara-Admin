@@ -1,5 +1,5 @@
 module.exports = {
-	base: 'backend/packages/lara-admin',
+	base: '/backend/packages/lara-admin',
 	title: 'Laravel Admin',
 	description: '',
 	host: 'localhost',
