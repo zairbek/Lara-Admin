@@ -86,6 +86,6 @@ class BootstrapAdminLte extends Preset
 			rmdir($imgDir);
 		}
 
-		(new Filesystem())->copyDirectory(__DIR__.'/bootstrap-adminlte-stubs/img', resource_path('img'));
+		(new Filesystem())->copyDirectory(__DIR__.'/bootstrap-adminlte-stubs/img', $imgDir);
 	}
 }
