@@ -40,7 +40,7 @@ class LaraAdminServiceProvider extends ServiceProvider
 
 	/**
 	 * Когда мы используем полиморфные связи, в колонку model_type записывается вот так '\Namespace\Classname'
-	 * Ниже мы переопределяем это. И теперь, если мы даже хотим переопределить класс (наследоваться), то нам нужно просто
+	 * Ниже мы переопределяем это. И теперь, если мы даже хотим переопределить класс (наследоваться), то нам нужно просто поменять в конфиге классы
 	 * @url https://laravel.com/docs/8.x/eloquent-relationships#custom-polymorphic-types
 	 */
 	protected function registerMorphMap(): void
@@ -52,6 +52,12 @@ class LaraAdminServiceProvider extends ServiceProvider
 		]);
 	}
 
+	/**
+	 * Зарегистрируем артизан команды
+	 *
+	 * @example php artisan future:install
+	 * @url https://laravelpackage.com/06-artisan-commands.html#registering-a-command-in-the-service-provider
+	 */
 	protected function registerCommands(): void
 	{
 		if ($this->app->runningInConsole()) {
@@ -64,11 +70,24 @@ class LaraAdminServiceProvider extends ServiceProvider
 		}
 	}
 
+	/**
+	 * Зарегистрируем blade шаблоны
+	 *
+	 * @example view('future::pages.admin.index')
+	 * @example @extends('future::layouts.admin')
+	 * @url https://laravelpackage.com/09-routing.html#views
+	 */
 	protected function registerViews(): void
 	{
 		$this->loadViewsFrom(__DIR__.'/../resources/views', 'future');
 	}
 
+	/**
+	 * Зарегистрируем компоненты
+	 *
+	 * @example <x-future-sidebar/> вызовет компонент Future\LaraAdmin\View\Components\Sidebar::class
+	 * @url https://laravelpackage.com/09-routing.html#view-components
+	 */
 	protected function registerViewComponents(): void
 	{
 		$this->loadViewComponentsAs('future', [
@@ -77,6 +96,13 @@ class LaraAdminServiceProvider extends ServiceProvider
 		]);
 	}
 
+	/**
+	 * Зарегистрируем blade шаблоны на публикацию
+	 *
+	 * @example php artisan future:publish
+	 * @example php artisan vendor:publish --provider="Future\LaraAdmin\LaraAdminServiceProvider" --tag="future::views.all"
+	 * @url https://laravelpackage.com/09-routing.html#customizable-views
+	 */
 	protected function registerPublished(): void
 	{
 		$this->publishes([
@@ -108,6 +134,11 @@ class LaraAdminServiceProvider extends ServiceProvider
 		], 'future::views.pages.admin.users');
 	}
 
+	/**
+	 * Зарегистрируем роуты
+	 *
+	 * @url https://laravelpackage.com/09-routing.html#routes
+	 */
 	protected function registerRoutes(): void
 	{
 		$this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
@@ -123,6 +154,11 @@ class LaraAdminServiceProvider extends ServiceProvider
 		$router->aliasMiddleware('role_or_permission', RoleOrPermissionMiddleware::class);
 	}
 
+	/**
+	 * Зарегистрируем миграции на публикацию
+	 *
+	 * @url https://laravelpackage.com/08-models-and-migrations.html#publishing-migrations-method-1
+	 */
 	protected function registerMigrations(): void
 	{
 		// Export the migration
