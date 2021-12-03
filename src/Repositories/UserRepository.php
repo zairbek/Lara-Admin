@@ -23,8 +23,9 @@ class UserRepository extends Repository
     {
         DB::beginTransaction();
         try {
+            $model = clone $this->model;
             /** @var User $user */
-            $user = $this->model->fill($values);
+            $user = $model->fill($values);
             $user->save();
             $user = $user->refresh();
 
