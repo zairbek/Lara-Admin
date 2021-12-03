@@ -23,6 +23,8 @@
 - `database/seeders/PermissionSeeder.php` Создает доступов
 - `database/seeders/RoleSeeder.php` Создает ролей
 - `database/seeders/UserSeeder.php` Создает пользователей и привязывает с ролями
+- `database/seeders/SeedFakeUsersCommand.php` Создает тестовых пользователи
+  - Можно запустить по команде `php artisan future:seed:tests_users --count=20`
 
 ## Views (Шаблоны)
 

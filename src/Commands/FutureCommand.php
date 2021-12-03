@@ -36,6 +36,12 @@ class FutureCommand extends Command
 			$this->call('future:seed');
 		}
 
+		if ($this->confirm('Создаем тестовые пользователи?')) {
+			$count = (int) $this->ask('Сколько?', 10);
+
+			$this->call('future:seed:tests_users', ['--count' => $count]);
+		}
+
 		$this->call('future:publish');
 	}
 }
