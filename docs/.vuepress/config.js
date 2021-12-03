@@ -13,11 +13,6 @@ module.exports = {
 		sidebar: [
 			'/',
 			'/structs',
-			// '/usage',
-			// '/hooks',
-			// '/laravel-mix',
-			// '/schema-org',
-			// '/example-app',
 		],
 		displayAllHeaders: true,
 		sidebarDepth: 2

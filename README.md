@@ -12,4 +12,4 @@
 - [ ] Написать CI/CD
     - [ ] Запускать тесты
 
-## Документация в [wiki](https://gitlab.com/future-group/backend/packages/lara-admin/-/wikis/home)
+## [Документация тут](https://future-group.gitlab.io/backend/packages/lara-admin/)
