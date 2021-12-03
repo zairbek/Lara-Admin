@@ -20,9 +20,9 @@
 ## Установка
 Так как наш репозиторий является приватным, нам сначала нужно авторизоваться в композере:
 1. Нам нужно получить access token от gitlab    
-   ![Настройки](https://gitlab.com/future-group/backend/packages/lara-admin/-/raw/5bb14df767b9c98305e32eb02dc1e8a3fb273c5b/docs/img/img.png)   
-   ![Настройки](https://gitlab.com/future-group/backend/packages/lara-admin/-/raw/5bb14df767b9c98305e32eb02dc1e8a3fb273c5b/docs/img/img_1.png)
-   ![Настройки](https://gitlab.com/future-group/backend/packages/lara-admin/-/raw/5bb14df767b9c98305e32eb02dc1e8a3fb273c5b/docs/img/img_2.png)
+   ![Настройки](./img/img.png)   
+   ![Настройки](./img/img_1.png)
+   ![Настройки](./img/img_2.png)
 
 
 2. Авторизуемся:
