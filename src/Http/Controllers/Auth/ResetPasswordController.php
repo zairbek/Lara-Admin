@@ -3,8 +3,8 @@
 namespace Future\LaraAdmin\Http\Controllers\Auth;
 
 use Future\LaraAdmin\Http\Controllers\Controller;
-use Future\LaraAdmin\Http\Middleware\ResetsPasswords;
 use Future\LaraAdmin\LaraAdminServiceProvider;
+use Future\LaraAdmin\Traits\Auth\ResetsPasswords;
 
 class ResetPasswordController extends Controller
 {

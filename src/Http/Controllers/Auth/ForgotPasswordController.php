@@ -3,7 +3,7 @@
 namespace Future\LaraAdmin\Http\Controllers\Auth;
 
 use Future\LaraAdmin\Http\Controllers\Controller;
-use Future\LaraAdmin\Http\Middleware\SendsPasswordResetEmails;
+use Future\LaraAdmin\Traits\Auth\SendsPasswordResetEmails;
 
 class ForgotPasswordController extends Controller
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Future\LaraAdmin\Http\Middleware;
+namespace Future\LaraAdmin\Traits\Auth;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;

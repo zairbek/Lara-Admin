@@ -1,8 +1,7 @@
 <?php
 
-namespace Future\LaraAdmin\Http\Middleware;
+namespace Future\LaraAdmin\Traits\Auth;
 
-use Future\LaraAdmin\Traits\Auth\RedirectsUsers;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
