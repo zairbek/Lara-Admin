@@ -99,3 +99,32 @@ resources
 - `registerMigrations()` Зарегистрируем миграции на публикацию [Документация](https://laravelpackage.com/08-models-and-migrations.html#publishing-migrations-method-1)
 
 ### src/Commands/
+
+### src/Http/Controllers
+- Если нужно расширить функционал контроллера, наследуйтесь или переопределите контроллер, и не забудьте также переопределить роут
+
+### src/Http/Middleware
+- `Authenticate.php` - 'auth.admin'
+- `RedirectIfAuthenticated.php` - 'guest.admin'
+
+### src/Http/Requests
+- Обычные реквесты с валидацией
+
+
+### src/Models
+- `User.php` Базовый модель пользователя
+
+### src/Repositories
+- Все манипуляции таблицы должны проходить через репозиторий
+- Например:
+  - Нужно создать пользователя.
+  - ```php
+    $repo = app(\Future\LaraAdmin\Repositories\UserRepository::class);
+    $repo->createUser(['email' => 'email@gmail.com'], 'user');
+    ```
+
+### src/Traits
+- Трейты
+
+### src/View
+- Логика компонентов
