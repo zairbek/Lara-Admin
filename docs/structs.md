@@ -83,7 +83,7 @@ resources
   - Middleware зарегистрируется автоматом в файле `LaraAdminServiceProvider.php`, строка - `$router->aliasMiddleware('auth.admin', Authenticate::class);`
   - Middleware `permission:admin@show` посмотрите документацию [laravel-permissions](https://spatie.be/docs/laravel-permission/v5/basic-usage/middleware#package-middleware)
 
-## src
+## Папка src
 
 ### src/LaraAdminServiceProvider.php
 
@@ -97,7 +97,5 @@ resources
   - Пример: `php artisan vendor:publish --provider="Future\LaraAdmin\LaraAdminServiceProvider" --tag="future::views.all"`
 
 - `registerMigrations()` Зарегистрируем миграции на публикацию [Документация](https://laravelpackage.com/08-models-and-migrations.html#publishing-migrations-method-1)
-
-
 
 ### src/Commands/
