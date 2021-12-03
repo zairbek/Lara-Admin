@@ -4,6 +4,7 @@ namespace Future\LaraAdmin;
 
 use Future\LaraAdmin\Commands\FutureCommand;
 use Future\LaraAdmin\Commands\PublishResourcesCommand;
+use Future\LaraAdmin\Commands\SeedFakeUsersCommand;
 use Future\LaraAdmin\Commands\SeedUsersRolesPermissionsCommand;
 use Future\LaraAdmin\Commands\UiCommand;
 use Future\LaraAdmin\Http\Middleware\Authenticate;
@@ -66,6 +67,7 @@ class LaraAdminServiceProvider extends ServiceProvider
 				UiCommand::class,
 				SeedUsersRolesPermissionsCommand::class,
 				PublishResourcesCommand::class,
+				SeedFakeUsersCommand::class,
 			]);
 		}
 	}

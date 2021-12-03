@@ -22,7 +22,8 @@
     "autoload": {
         "psr-4": {
             "Future\\LaraAdmin\\": "src/",
-            "Future\\LaraAdmin\\Database\\Seeders\\": "database/seeders/"
+            "Future\\LaraAdmin\\Database\\Seeders\\": "database/seeders/",
+            "Future\\LaraAdmin\\Database\\Factories\\": "database/factories/"
         }
     },
     "autoload-dev": {

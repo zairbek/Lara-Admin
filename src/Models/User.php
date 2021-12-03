@@ -3,6 +3,7 @@
 namespace Future\LaraAdmin\Models;
 
 use Carbon\Carbon;
+use Future\LaraAdmin\Database\Factories\UserFactory;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Contracts\Hashing\Hasher;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -79,6 +80,14 @@ class User extends Authenticatable implements HasMedia
         'birthday' => 'datetime',
         'properties' => 'array',
     ];
+
+	/**
+	 * @return UserFactory
+	 */
+    protected static function newFactory()
+	{
+//		return new UserFactory();
+	}
 
 	public function setPasswordAttribute($value)
 	{
