@@ -26,7 +26,7 @@ class FakeUserSeeder extends Seeder
 				'last_name' => $faker->lastName,
 				'second_name' => $faker->name,
 				'login' => $faker->userName,
-				'phone_number' => $faker->phoneNumber,
+				'phone_number' => null,
 				'email' => $faker->unique()->safeEmail(),
 				'email_verified_at' => now(),
 				'password' => 'password',
