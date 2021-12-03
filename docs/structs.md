@@ -1,4 +1,5 @@
-## Зависимости:
+# Laravel Admin
+## Зависимости
 
 - `spatie/laravel-permission` для ролей и доступов
 - `spatie/laravel-medialibrary` для работы с файлами
