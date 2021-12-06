@@ -201,12 +201,16 @@ class LaraAdminServiceProvider extends ServiceProvider
 	protected function registerMenu(): void
 	{
 		$this->publishes([
-			__DIR__.'/../routes/menu.php' => base_path('routes'),
+			__DIR__.'/../routes/menu.php' => base_path('routes/menu.php'),
 		], 'future::routes.menu');
 
 		Menu::mixin(new MenuMixin());
 		Html::mixin(new HtmlMixin());
 
-		require base_path('routes/menu.php');
+		if (file_exists(base_path('routes/menu.php'))) {
+			require base_path('routes/menu.php');
+		} else {
+			require __DIR__.'/../routes/menu.php';
+		}
 	}
 }
