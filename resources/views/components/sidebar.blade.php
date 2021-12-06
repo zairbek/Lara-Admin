@@ -32,7 +32,7 @@
         </div>
 
         <!-- Sidebar Menu -->
-        <x-future-menu/>
+        {!! Spatie\Menu\Laravel\Facades\Menu::main() !!}
         <!-- /.sidebar-menu -->
     </div>
     <!-- /.sidebar -->

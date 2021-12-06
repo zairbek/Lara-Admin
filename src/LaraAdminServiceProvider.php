@@ -9,11 +9,15 @@ use Future\LaraAdmin\Commands\SeedUsersRolesPermissionsCommand;
 use Future\LaraAdmin\Commands\UiCommand;
 use Future\LaraAdmin\Http\Middleware\Authenticate;
 use Future\LaraAdmin\Http\Middleware\RedirectIfAuthenticated;
+use Future\LaraAdmin\Mixins\HtmlMixin;
+use Future\LaraAdmin\Mixins\MenuMixin;
 use Future\LaraAdmin\View\Components\Sidebar;
-use Future\LaraAdmin\View\Components\Menu;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
+use ReflectionException;
+use Spatie\Menu\Laravel\Html;
+use Spatie\Menu\Laravel\Menu;
 use Spatie\Permission\Middlewares\PermissionMiddleware;
 use Spatie\Permission\Middlewares\RoleMiddleware;
 use Spatie\Permission\Middlewares\RoleOrPermissionMiddleware;
@@ -22,6 +26,9 @@ class LaraAdminServiceProvider extends ServiceProvider
 {
 	public const HOME = '/admin';
 
+	/**
+	 * @throws ReflectionException
+	 */
 	public function boot()
 	{
 		$this->registerMorphMap();
@@ -32,6 +39,7 @@ class LaraAdminServiceProvider extends ServiceProvider
 		$this->registerRoutes();
 		$this->registerMiddlewares();
 		$this->registerMigrations();
+		$this->registerMenu();
 	}
 
 	public function register()
@@ -94,7 +102,6 @@ class LaraAdminServiceProvider extends ServiceProvider
 	{
 		$this->loadViewComponentsAs('future', [
 			Sidebar::class,
-			Menu::class,
 		]);
 	}
 
@@ -184,5 +191,22 @@ class LaraAdminServiceProvider extends ServiceProvider
 				], 'migrations:update_permissions_table');
 			}
 		}
+	}
+
+	/**
+	 * Импортируем меню
+	 *
+	 * @throws ReflectionException
+	 */
+	protected function registerMenu(): void
+	{
+		$this->publishes([
+			__DIR__.'/../routes/menu.php' => base_path('routes'),
+		], 'future::routes.menu');
+
+		Menu::mixin(new MenuMixin());
+		Html::mixin(new HtmlMixin());
+
+		require base_path('routes/menu.php');
 	}
 }

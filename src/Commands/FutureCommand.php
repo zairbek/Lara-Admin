@@ -24,6 +24,7 @@ class FutureCommand extends Command
 			$this->call('vendor:publish', ['--provider' => 'Future\LaraAdmin\LaraAdminServiceProvider', '--tag' => 'migrations:create_future_users_table.drop_old_users_table']);
 		}
 
+		$this->call('vendor:publish', ['--provider' => 'Future\LaraAdmin\LaraAdminServiceProvider', '--tag' => 'future::routes.menu']);
 		$this->call('vendor:publish', ['--provider' => 'Future\LaraAdmin\LaraAdminServiceProvider', '--tag' => 'migrations:update_permissions_table']);
 		$this->call('vendor:publish', ['--provider' => 'Spatie\Permission\PermissionServiceProvider']);
 		$this->call('config:clear');
