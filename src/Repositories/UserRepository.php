@@ -2,7 +2,6 @@
 
 namespace Future\LaraAdmin\Repositories;
 
-use Future\LaraAdmin\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
@@ -11,7 +10,7 @@ class UserRepository extends Repository
 {
     protected function model(): string
     {
-        return User::class;
+        return config('auth.providers.users.model');
     }
 
 	protected function afterMakeBuilder()

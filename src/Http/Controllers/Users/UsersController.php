@@ -12,6 +12,7 @@ use Future\LaraAdmin\Http\Requests\User\UpdateUserRequest;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\DB;
@@ -96,6 +97,8 @@ class UsersController extends Controller
 	 */
     public function show(ShowUserRequest $request, User $user): View|Factory|Application
 	{
+        $user = $this->getUserCurrentUserModel($user);
+
         $user->load('roles');
         $roles = $this->roleRepository->all();
 
@@ -111,6 +114,8 @@ class UsersController extends Controller
 	 */
     public function edit(EditUserRequest $request, User $user): View|Factory|Application
 	{
+        $user = $this->getUserCurrentUserModel($user);
+
         $user->load('roles');
         $roles = $this->roleRepository->all();
 
@@ -127,6 +132,8 @@ class UsersController extends Controller
      */
     public function update(UpdateUserRequest $request, User $user): RedirectResponse
 	{
+        $user = $this->getUserCurrentUserModel($user);
+
         $params = $request->validated();
         if (! $request->get('password')) {
             $params = $request->except('password');
@@ -149,6 +156,8 @@ class UsersController extends Controller
 	 */
     public function destroy(DeleteUserRequest $request, User $user): RedirectResponse
 	{
+        $user = $this->getUserCurrentUserModel($user);
+
         $user->delete();
 
         return back();
@@ -161,6 +170,8 @@ class UsersController extends Controller
      */
     public function avatarUpdate(Request $request, User $user): RedirectResponse
 	{
+        $user = $this->getUserCurrentUserModel($user);
+
         $request->validate([
             'avatar' => ['required', 'mimetypes:image/jpeg,image/png', 'max:10000']
         ]);
@@ -169,5 +180,12 @@ class UsersController extends Controller
         $user->save();
 
         return back()->with('message', 'success');
+    }
+
+    private function getUserCurrentUserModel(User $user): Model
+    {
+        return app(
+            config('auth.providers.users.model')
+        )::find($user->id);
     }
 }
