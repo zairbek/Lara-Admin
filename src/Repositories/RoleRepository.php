@@ -3,7 +3,7 @@
 namespace Future\LaraAdmin\Repositories;
 
 use Illuminate\Database\Eloquent\Builder;
-use Spatie\Permission\Models\Role;
+use Spatie\Permission\Contracts\Role;
 
 class RoleRepository extends Repository
 {
@@ -11,7 +11,7 @@ class RoleRepository extends Repository
 
     protected function model(): string
     {
-        return Role::class;
+        return config('permission.models.role');
     }
 
     public function getDefaultRole(): Role

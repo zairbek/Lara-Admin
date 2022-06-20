@@ -99,6 +99,7 @@ class RolesController extends Controller
 	 */
     public function show(ShowRoleRequest $request, Role $role): View|Factory|Application
 	{
+        $role = $this->getRoleCurrentRoleModel($role);
         $permissions = $this->permissionRepository->all();
 
         return view('future::pages.admin.settings.roles.show', compact('role', 'permissions'));
@@ -113,6 +114,7 @@ class RolesController extends Controller
 	 */
     public function edit(EditRoleRequest $request, Role $role): View|Factory|Application
 	{
+        $role = $this->getRoleCurrentRoleModel($role);
         $permissions = $this->permissionRepository->all();
 
         return view('future::pages.admin.settings.roles.edit', compact('role', 'permissions'));
@@ -127,6 +129,8 @@ class RolesController extends Controller
 	 */
     public function update(UpdateRoleRequest $request, Role $role): Redirector|RedirectResponse|Application
 	{
+        $role = $this->getRoleCurrentRoleModel($role);
+
         DB::beginTransaction();
         try {
             $role->fill($request->validated())->save();
@@ -153,8 +157,16 @@ class RolesController extends Controller
 	 */
     public function destroy(DeleteRoleRequest $request, Role $role): RedirectResponse
 	{
+        $role = $this->getRoleCurrentRoleModel($role);
         $role->delete();
 
         return back()->with('message', 'success');
+    }
+
+    private function getRoleCurrentRoleModel(Role $role): \Spatie\Permission\Contracts\Role
+    {
+        return app(
+            config('permission.models.role')
+        )::find($role->id);
     }
 }

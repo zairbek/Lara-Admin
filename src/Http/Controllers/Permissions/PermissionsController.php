@@ -88,6 +88,8 @@ class PermissionsController extends Controller
 	 */
     public function show(ShowPermissionRequest $request, Permission $permission): View|Factory|Application
 	{
+        $permission = $this->getPermissionCurrentPermissionModel($permission);
+
         return view('future::pages.admin.settings.permissions.show', compact('permission'));
     }
 
@@ -100,6 +102,8 @@ class PermissionsController extends Controller
 	 */
     public function edit(EditPermissionRequest $request, Permission $permission): View|Factory|Application
 	{
+        $permission = $this->getPermissionCurrentPermissionModel($permission);
+
         return view('future::pages.admin.settings.permissions.edit', compact( 'permission'));
     }
 
@@ -113,6 +117,8 @@ class PermissionsController extends Controller
      */
     public function update(UpdatePermissionRequest $request, Permission $permission): Redirector|RedirectResponse|Application
 	{
+        $permission = $this->getPermissionCurrentPermissionModel($permission);
+
         DB::beginTransaction();
         try {
             $permission->fill($request->validated())->save();
@@ -124,5 +130,14 @@ class PermissionsController extends Controller
             DB::rollBack();
             return back()->with('error', $exception->getMessage());
         }
+    }
+
+    private function getPermissionCurrentPermissionModel(
+        Permission $permission
+    ): \Spatie\Permission\Contracts\Permission
+    {
+        return app(
+            config('permission.models.permission')
+        )::find($permission->id);
     }
 }
