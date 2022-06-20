@@ -3,7 +3,7 @@
 namespace Future\LaraAdmin\Repositories;
 
 use Illuminate\Database\Eloquent\Builder;
-use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Contracts\Permission;
 
 class PermissionRepository extends Repository
 {
@@ -12,7 +12,7 @@ class PermissionRepository extends Repository
 	 */
 	protected function model(): string
 	{
-		return Permission::class;
+        return config('permission.models.permission');
 	}
 
 	/**
