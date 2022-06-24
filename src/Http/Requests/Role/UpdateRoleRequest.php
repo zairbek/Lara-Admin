@@ -13,7 +13,7 @@ class UpdateRoleRequest extends FormRequest
      */
     public function authorize()
     {
-		return $this->user()->hasPermissionTo('roles@edit');
+        return true;
     }
 
     /**

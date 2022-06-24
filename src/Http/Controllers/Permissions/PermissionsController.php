@@ -29,6 +29,7 @@ class PermissionsController extends Controller
 	 */
     public function __construct(PermissionRepository $permissionRepository)
     {
+        $this->authorizeResource(config('permission.models.permission'), 'permission');
         $this->permissionRepository = $permissionRepository;
     }
 

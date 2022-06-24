@@ -13,7 +13,7 @@ class DeleteUserRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->hasPermissionTo('users@delete');
+        return true;
     }
 
     /**
