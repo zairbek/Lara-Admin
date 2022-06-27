@@ -13,7 +13,7 @@ class IndexPermissionRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->hasPermissionTo('permissions@show');
+        return true;
     }
 
     /**

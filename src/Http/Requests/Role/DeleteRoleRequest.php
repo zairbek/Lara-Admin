@@ -13,7 +13,7 @@ class DeleteRoleRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->hasPermissionTo('roles@delete');
+        return true;
     }
 
     /**

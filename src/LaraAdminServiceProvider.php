@@ -11,9 +11,14 @@ use Future\LaraAdmin\Http\Middleware\Authenticate;
 use Future\LaraAdmin\Http\Middleware\RedirectIfAuthenticated;
 use Future\LaraAdmin\Mixins\HtmlMixin;
 use Future\LaraAdmin\Mixins\MenuMixin;
+use Future\LaraAdmin\Models\User;
+use Future\LaraAdmin\Policies\PermissionPolicy;
+use Future\LaraAdmin\Policies\RolePolicy;
+use Future\LaraAdmin\Policies\UserPolicy;
 use Future\LaraAdmin\View\Components\Sidebar;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use ReflectionException;
 use Spatie\Menu\Laravel\Html;
@@ -21,6 +26,8 @@ use Spatie\Menu\Laravel\Menu;
 use Spatie\Permission\Middlewares\PermissionMiddleware;
 use Spatie\Permission\Middlewares\RoleMiddleware;
 use Spatie\Permission\Middlewares\RoleOrPermissionMiddleware;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class LaraAdminServiceProvider extends ServiceProvider
 {
@@ -40,7 +47,8 @@ class LaraAdminServiceProvider extends ServiceProvider
 		$this->registerMiddlewares();
 		$this->registerMigrations();
 		$this->registerMenu();
-	}
+        $this->registerPolicies();
+    }
 
 	public function register()
 	{
@@ -213,4 +221,17 @@ class LaraAdminServiceProvider extends ServiceProvider
 			require __DIR__.'/../routes/menu.php';
 		}
 	}
+
+    protected function registerPolicies()
+    {
+        $policies = [
+            User::class => UserPolicy::class,
+            Role::class => RolePolicy::class,
+            Permission::class => PermissionPolicy::class,
+        ];
+
+        foreach ($policies as $key => $value) {
+            Gate::policy($key, $value);
+        }
+    }
 }

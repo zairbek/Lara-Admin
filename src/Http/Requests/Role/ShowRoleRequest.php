@@ -13,7 +13,7 @@ class ShowRoleRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->hasPermissionTo('roles@show');
+        return true;
     }
 
     /**

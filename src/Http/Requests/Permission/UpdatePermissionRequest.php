@@ -13,7 +13,7 @@ class UpdatePermissionRequest extends FormRequest
      */
     public function authorize()
     {
-		return $this->user()->hasPermissionTo('permissions@edit');
+        return true;
     }
 
     /**

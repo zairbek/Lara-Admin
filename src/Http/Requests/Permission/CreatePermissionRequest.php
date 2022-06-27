@@ -13,7 +13,7 @@ class CreatePermissionRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->hasPermissionTo('permissions@create');
+        return true;
     }
 
     /**
