@@ -2,6 +2,7 @@
 
 namespace Future\LaraAdmin\Policies;
 
+use Future\LaraAdmin\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class PermissionPolicy
@@ -13,9 +14,9 @@ class PermissionPolicy
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function viewAny()
+    public function viewAny(User $user): bool
     {
-        return auth()->user()->can('permissions@show');
+        return $user->can('permissions@show');
     }
 
     /**
@@ -23,9 +24,9 @@ class PermissionPolicy
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view()
+    public function view(User $user): bool
     {
-        return auth()->user()->can('permissions@show');
+        return $user->can('permissions@show');
     }
 
     /**
@@ -33,9 +34,9 @@ class PermissionPolicy
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function create()
+    public function create(User $user): bool
     {
-        return auth()->user()->can('permissions@create');
+        return $user->can('permissions@create');
     }
 
     /**
@@ -43,9 +44,9 @@ class PermissionPolicy
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update()
+    public function update(User $user): bool
     {
-        return auth()->user()->can('permissions@edit');
+        return $user->can('permissions@edit');
     }
 
     /**
@@ -53,9 +54,9 @@ class PermissionPolicy
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete()
+    public function delete(User $user): bool
     {
-        return auth()->user()->can('permissions@delete');
+        return $user->can('permissions@delete');
     }
 
     /**
@@ -63,9 +64,9 @@ class PermissionPolicy
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore()
+    public function restore(User $user): bool
     {
-        return auth()->user()->can('permissions@edit');
+        return $user->can('permissions@edit');
     }
 
     /**
@@ -73,8 +74,8 @@ class PermissionPolicy
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete()
+    public function forceDelete(User $user): bool
     {
-        return auth()->user()->can('permissions@delete');
+        return $user->can('permissions@delete');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Future\LaraAdmin\Policies;
 
+use Future\LaraAdmin\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class UserPolicy
@@ -13,9 +14,9 @@ class UserPolicy
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function viewAny()
+    public function viewAny(User $user): bool
     {
-        return auth()->user()->can('users@show');
+        return $user->can('users@show');
     }
 
     /**
@@ -23,10 +24,9 @@ class UserPolicy
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view()
+    public function view(User $user): bool
     {
-        return auth()->user()->can('users@show');
-
+        return $user->can('users@show');
     }
 
     /**
@@ -34,9 +34,9 @@ class UserPolicy
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function create()
+    public function create(User $user): bool
     {
-        return auth()->user()->can('users@create');
+        return $user->can('users@create');
     }
 
     /**
@@ -44,9 +44,9 @@ class UserPolicy
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update()
+    public function update(User $user): bool
     {
-        return auth()->user()->can('users@edit');
+        return $user->can('users@edit');
     }
 
     /**
@@ -54,9 +54,9 @@ class UserPolicy
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete()
+    public function delete(User $user): bool
     {
-        return auth()->user()->can('users@delete');
+        return $user->can('users@delete');
     }
 
     /**
@@ -64,9 +64,9 @@ class UserPolicy
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore()
+    public function restore(User $user): bool
     {
-        return auth()->user()->can('users@edit');
+        return $user->can('users@edit');
     }
 
     /**
@@ -74,8 +74,8 @@ class UserPolicy
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete()
+    public function forceDelete(User $user): bool
     {
-        return auth()->user()->can('users@delete');
+        return $user->can('users@delete');
     }
 }

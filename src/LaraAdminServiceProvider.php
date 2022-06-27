@@ -11,6 +11,7 @@ use Future\LaraAdmin\Http\Middleware\Authenticate;
 use Future\LaraAdmin\Http\Middleware\RedirectIfAuthenticated;
 use Future\LaraAdmin\Mixins\HtmlMixin;
 use Future\LaraAdmin\Mixins\MenuMixin;
+use Future\LaraAdmin\Models\User;
 use Future\LaraAdmin\Policies\PermissionPolicy;
 use Future\LaraAdmin\Policies\RolePolicy;
 use Future\LaraAdmin\Policies\UserPolicy;
@@ -25,6 +26,8 @@ use Spatie\Menu\Laravel\Menu;
 use Spatie\Permission\Middlewares\PermissionMiddleware;
 use Spatie\Permission\Middlewares\RoleMiddleware;
 use Spatie\Permission\Middlewares\RoleOrPermissionMiddleware;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class LaraAdminServiceProvider extends ServiceProvider
 {
@@ -222,9 +225,9 @@ class LaraAdminServiceProvider extends ServiceProvider
     protected function registerPolicies()
     {
         $policies = [
-            config('auth.providers.users.model') => UserPolicy::class,
-            config('permission.models.role') => RolePolicy::class,
-            config('permission.models.permission') => PermissionPolicy::class,
+            User::class => UserPolicy::class,
+            Role::class => RolePolicy::class,
+            Permission::class => PermissionPolicy::class,
         ];
 
         foreach ($policies as $key => $value) {

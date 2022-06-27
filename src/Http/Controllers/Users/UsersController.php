@@ -35,7 +35,7 @@ class UsersController extends Controller
 	 */
     public function __construct(RoleRepository $roleRepository, UserRepository $userRepository)
     {
-        $this->authorizeResource(config('auth.providers.users.model'), 'user');
+        $this->authorizeResource(User::class, 'user');
         $this->roleRepository = $roleRepository;
         $this->userRepository = $userRepository;
     }

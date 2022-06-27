@@ -33,7 +33,7 @@ class RolesController extends Controller
 	 */
     public function __construct(RoleRepository $roleRepository, PermissionRepository $permissionRepository)
     {
-        $this->authorizeResource(config('permission.models.role'), 'role');
+        $this->authorizeResource(Role::class, 'role');
         $this->roleRepository = $roleRepository;
         $this->permissionRepository = $permissionRepository;
     }

@@ -2,6 +2,7 @@
 
 namespace Future\LaraAdmin\Policies;
 
+use Future\LaraAdmin\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class RolePolicy
@@ -13,9 +14,9 @@ class RolePolicy
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function viewAny()
+    public function viewAny(User $user): bool
     {
-        return auth()->user()->can('role@show');
+        return $user->can('roles@show');
     }
 
     /**
@@ -23,9 +24,9 @@ class RolePolicy
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view()
+    public function view(User $user): bool
     {
-        return auth()->user()->can('role@show');
+        return $user->can('roles@show');
     }
 
     /**
@@ -33,9 +34,9 @@ class RolePolicy
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function create()
+    public function create(User $user): bool
     {
-        return auth()->user()->can('role@create');
+        return $user->can('roles@create');
     }
 
     /**
@@ -43,9 +44,9 @@ class RolePolicy
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update()
+    public function update(User $user): bool
     {
-        return auth()->user()->can('role@edit');
+        return $user->can('roles@edit');
     }
 
     /**
@@ -53,9 +54,9 @@ class RolePolicy
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete()
+    public function delete(User $user): bool
     {
-        return auth()->user()->can('role@delete');
+        return $user->can('roles@delete');
     }
 
     /**
@@ -63,9 +64,9 @@ class RolePolicy
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore()
+    public function restore(User $user): bool
     {
-        return auth()->user()->can('role@edit');
+        return $user->can('roles@edit');
     }
 
     /**
@@ -73,8 +74,8 @@ class RolePolicy
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete()
+    public function forceDelete(User $user): bool
     {
-        return auth()->user()->can('role@delete');
+        return $user->can('roles@delete');
     }
 }
